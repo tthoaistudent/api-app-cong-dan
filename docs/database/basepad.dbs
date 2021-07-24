@@ -1,0 +1,1254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="basepad" id="Project_214" database="MongoDb" >
+	<schema name="basepad" >
+		<table name="Collection" />
+		<table name="Collection_0" />
+		<table name="applyMethod" >
+			<comment><![CDATA[Bảng hình thức nộp]]></comment>
+			<column name="_id" type="oid" jt="-8" mandatory="y" />
+			<column name="name" type="string" jt="12" />
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updatedDate" type="date" jt="91" />
+		</table>
+		<table name="configuration" >
+			<column name="_id" type="oid" jt="-8" />
+			<column name="logo" type="object" jt="4999544" mandatory="y" />
+			<column name="banner" type="object" jt="4999544" mandatory="y" />
+			<column name="link" type="array" jt="2003" />
+			<column name="footer" type="string" jt="12" />
+			<column name="deploymentId" type="oid" jt="-8" mandatory="y" />
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updatedDate" type="date" jt="91" mandatory="y" />
+		</table>
+		<table name="configuration.banner" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" mandatory="y" />
+			<column name="filename" type="string" jt="12" mandatory="y" />
+			<column name="size" type="long" jt="-1" />
+			<index name="Idx_configuration.banner_*" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_otherConfiguration.banner_otherConfiguration" virtual="y" to_schema="basepad" to_table="configuration" >
+				<fk_column name="*" pk="banner" />
+			</fk>
+		</table>
+		<table name="configuration.link" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<column name="url" type="string" jt="12" mandatory="y" />
+			<column name="logo" type="object" jt="4999544" />
+			<fk name="Fk_otherConfiguration.link_otherConfiguration" virtual="y" to_schema="basepad" to_table="configuration" >
+				<fk_column name="*" pk="link" />
+			</fk>
+		</table>
+		<table name="configuration.link.logo" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" mandatory="y" />
+			<column name="filename" type="string" jt="12" mandatory="y" />
+			<column name="size" type="long" jt="-1" />
+			<fk name="Fk_otherConfiguration.link.logo_otherConfiguration.link" virtual="y" to_schema="basepad" to_table="configuration.link" >
+				<fk_column name="*" pk="logo" />
+			</fk>
+		</table>
+		<table name="configuration.link.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="string" jt="12" mandatory="y" />
+			<fk name="Fk_otherConfiguration.nameLink_otherConfiguration.link" virtual="y" to_schema="basepad" to_table="configuration.link" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="configuration.logo" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" mandatory="y" />
+			<column name="filename" type="string" jt="12" mandatory="y" />
+			<column name="size" type="long" jt="-1" />
+			<index name="Idx_configuration.logo_*" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_otherConfiguration.logo_otherConfiguration" virtual="y" to_schema="basepad" to_table="configuration" >
+				<fk_column name="*" pk="logo" />
+			</fk>
+		</table>
+		<table name="form" >
+			<comment><![CDATA[Bảng giấy tờ]]></comment>
+			<column name="_id" type="oid" jt="-8" mandatory="y" />
+			<column name="code" type="string" jt="12" />
+			<column name="name" type="array" jt="2003" />
+			<column name="status" type="integer" jt="4" />
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updatedDate" type="date" jt="91" />
+		</table>
+		<table name="form.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_form.name_form" virtual="y" to_schema="basepad" to_table="form" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="menu" >
+			<column name="_id" type="oid" jt="-8" mandatory="y" />
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<column name="route" type="string" jt="12" />
+			<column name="status" type="integer" jt="4" mandatory="y" />
+			<column name="children" type="array" jt="2003" />
+			<column name="order" type="integer" jt="4" mandatory="y" />
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updateDate" type="date" jt="91" mandatory="y" />
+		</table>
+		<table name="menu.children" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" mandatory="y" />
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<column name="order" type="integer" jt="4" mandatory="y" />
+			<column name="route" type="string" jt="12" mandatory="y" />
+			<fk name="Fk_menu.children_menu" virtual="y" to_schema="basepad" to_table="menu" >
+				<fk_column name="*" pk="children" />
+			</fk>
+		</table>
+		<table name="menu.children.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_menu.children.name_menu.children" virtual="y" to_schema="basepad" to_table="menu.children" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="menu.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_menu.name_menu" virtual="y" to_schema="basepad" to_table="menu" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="menuConfiguration" >
+			<column name="_id" type="oid" jt="-8" mandatory="y" />
+			<column name="menu" type="object" jt="4999544" mandatory="y" />
+			<column name="agency" type="object" jt="4999544" mandatory="y" />
+			<column name="order" type="integer" jt="4" mandatory="y" />
+			<column name="status" type="integer" jt="4" mandatory="y" />
+			<column name="deploymenId" type="oid" jt="-8" mandatory="y" />
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updatedDate" type="date" jt="91" mandatory="y" />
+		</table>
+		<table name="menuConfiguration.agency" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" mandatory="y" />
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<index name="Idx_menuConfiguration.agency_*" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_menuConfiguration.agency_menuConfiguration" virtual="y" to_schema="basepad" to_table="menuConfiguration" >
+				<fk_column name="*" pk="agency" />
+			</fk>
+		</table>
+		<table name="menuConfiguration.agency.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_menuConfiguration.agency.name_menuConfiguration.agency" virtual="y" to_schema="basepad" to_table="menuConfiguration.agency" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="menuConfiguration.menu" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" mandatory="y" />
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<column name="route" type="string" jt="12" mandatory="y" />
+			<column name="children" type="array" jt="2003" />
+			<index name="Idx_menuConfiguration.menu_*" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_menuConfiguration.menu_menuConfiguration" virtual="y" to_schema="basepad" to_table="menuConfiguration" >
+				<fk_column name="*" pk="menu" />
+			</fk>
+		</table>
+		<table name="menuConfiguration.menu.children" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" mandatory="y" />
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<column name="order" type="integer" jt="4" mandatory="y" />
+			<column name="route" type="string" jt="12" mandatory="y" />
+			<fk name="Fk_menuConfiguration.menu.parent_menuConfiguration.menu" virtual="y" to_schema="basepad" to_table="menuConfiguration.menu" >
+				<fk_column name="*" pk="children" />
+			</fk>
+		</table>
+		<table name="menuConfiguration.menu.children.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_menuConfiguration.menu.parent.name_menuConfiguration.menu.parent" virtual="y" to_schema="basepad" to_table="menuConfiguration.menu.children" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="menuConfiguration.menu.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_menuConfiguration.menu.name_menuConfiguration.menu" virtual="y" to_schema="basepad" to_table="menuConfiguration.menu" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="menuConfiguration.menu_1" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" mandatory="y" />
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<column name="route" type="string" jt="12" mandatory="y" />
+		</table>
+		<table name="paymentMethod" >
+			<comment><![CDATA[Bảng hình thức thanh toán]]></comment>
+			<column name="_id" type="oid" jt="-8" />
+			<column name="name" type="string" jt="12" />
+			<column name="status" type="integer" jt="4" />
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updatedDate" type="date" jt="91" />
+		</table>
+		<table name="procedure" >
+			<comment><![CDATA[Bảng thủ tục hành chính]]></comment>
+			<column name="_id" type="oid" jt="-8" mandatory="y" />
+			<column name="code" type="string" jt="12" mandatory="y" >
+				<comment><![CDATA[Tên tắt thủ tục]]></comment>
+			</column>
+			<column name="level" type="object" jt="4999544" mandatory="y" >
+				<comment><![CDATA[mức độ thủ tục]]></comment>
+			</column>
+			<column name="agencyLevel" type="array" jt="2003" mandatory="y" >
+				<comment><![CDATA[ID cấp hành chính]]></comment>
+			</column>
+			<column name="sector" type="object" jt="4999544" mandatory="y" >
+				<comment><![CDATA[ID Lĩnh vực]]></comment>
+			</column>
+			<column name="dossierQuantity" type="integer" jt="4" >
+				<comment><![CDATA[Số bộ hồ sơ]]></comment>
+			</column>
+			<column name="applyMethod" type="array" jt="2003" mandatory="y" >
+				<comment><![CDATA[Hình thức nộp]]></comment>
+			</column>
+			<column name="translate" type="array" jt="2003" mandatory="y" />
+			<column name="viewCount" type="integer" jt="4" >
+				<comment><![CDATA[Lượt xem]]></comment>
+			</column>
+			<column name="paymentMethod" type="array" jt="2003" >
+				<comment><![CDATA[Hình thức thanh toán]]></comment>
+			</column>
+			<column name="agency" type="array" jt="2003" >
+				<comment><![CDATA[thủ tục theo đơn vị]]></comment>
+			</column>
+			<column name="agencyIssued" type="object" jt="4999544" />
+			<column name="startDate" type="date" jt="91" >
+				<comment><![CDATA[Ngày bắt đầu]]></comment>
+			</column>
+			<column name="endDate" type="date" jt="91" >
+				<comment><![CDATA[Ngày kết thúc]]></comment>
+			</column>
+			<column name="status" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[Trạng thái [0 đóng, 1 mở]]]></comment>
+			</column>
+			<column name="deploymentId" type="oid" jt="-8" mandatory="y" />
+			<column name="implementer" type="array" jt="2003" />
+			<column name="children" type="array" jt="2003" />
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updatedDate" type="date" jt="91" />
+			<column name="npadsvcSyncDate" type="date" jt="91" >
+				<comment><![CDATA[Ngày đồng bộ cổng DVC]]></comment>
+			</column>
+		</table>
+		<table name="procedure.agency" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" >
+				<comment><![CDATA[Mã đơn vị]]></comment>
+			</column>
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<fk name="Fk_procedure.agencyImpl_procedure" virtual="y" to_schema="basepad" to_table="procedure" >
+				<fk_column name="*" pk="agency" />
+			</fk>
+		</table>
+		<table name="procedure.agency.agencyAccept" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="array" jt="2003" />
+		</table>
+		<table name="procedure.agency.agencyAccept.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.agency.agencyAccept.name_procedure.agency.agencyAccept" virtual="y" to_schema="basepad" to_table="procedure.agency.agencyAccept" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedure.agency.agencyCombination" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="string" jt="12" />
+		</table>
+		<table name="procedure.agency.agencyCombination.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.agency.agencyCombination.name_procedure.agency.agencyCombination" virtual="y" to_schema="basepad" to_table="procedure.agency.agencyCombination" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedure.agencyLevel" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="array" jt="2003" />
+			<fk name="Fk_procedure.sector_0_procedure" virtual="y" to_schema="basepad" to_table="procedure" >
+				<fk_column name="*" pk="agencyLevel" />
+			</fk>
+		</table>
+		<table name="procedure.agencyLevel.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.sector.name_0_procedure.sector_0" virtual="y" to_schema="basepad" to_table="procedure.agencyLevel" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedure.angency.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.agency.name_procedure.agency_0" virtual="y" to_schema="basepad" to_table="procedure.agency" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedure.angencyIssued" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" >
+				<comment><![CDATA[Mã đơn vị]]></comment>
+			</column>
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<index name="Idx_procedure.angencyIssued" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedure.angencyIssued_procedure" virtual="y" to_schema="basepad" to_table="procedure" >
+				<fk_column name="*" pk="agencyIssued" />
+			</fk>
+		</table>
+		<table name="procedure.angencyIssued.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.angencyIssued.name_procedure.angencyIssued" virtual="y" to_schema="basepad" to_table="procedure.angencyIssued" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedure.applyMethod" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="array" jt="2003" />
+			<fk name="Fk_procedure.applyMethod_procedure" virtual="y" to_schema="basepad" to_table="procedure" >
+				<fk_column name="*" pk="applyMethod" />
+			</fk>
+		</table>
+		<table name="procedure.applyMethod.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.applyMethod.name__procedure.applyMethod" virtual="y" to_schema="basepad" to_table="procedure.applyMethod" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedure.case" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" mandatory="y" />
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<fk name="Fk_procedure.case_procedure" virtual="y" to_schema="basepad" to_table="procedure" />
+		</table>
+		<table name="procedure.case.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.case.name_procedure.case" virtual="y" to_schema="basepad" to_table="procedure.case" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedure.children" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="agency" type="object" jt="4999544" />
+			<fk name="Fk_procedure.children_procedure" virtual="y" to_schema="basepad" to_table="procedure" >
+				<fk_column name="*" pk="children" />
+			</fk>
+		</table>
+		<table name="procedure.children.agency" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<index name="Idx_procedure.children.agency_*" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedure.children.agency_procedure.children" virtual="y" to_schema="basepad" to_table="procedure.children" >
+				<fk_column name="*" pk="agency" />
+			</fk>
+		</table>
+		<table name="procedure.form.form.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.form.name_0_procedure.form.form" virtual="y" to_schema="basepad" to_table="procedureForm.file" >
+				<fk_column name="*" pk="size" />
+			</fk>
+		</table>
+		<table name="procedure.implementer" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="code" type="string" jt="12" />
+			<column name="name" type="array" jt="2003" />
+			<fk name="Fk_procedure.implementer_procedure" virtual="y" to_schema="basepad" to_table="procedure" >
+				<fk_column name="*" pk="implementer" />
+			</fk>
+		</table>
+		<table name="procedure.implementer.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.implementer.name_procedure.implementer" virtual="y" to_schema="basepad" to_table="procedure.implementer" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedure.level" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="array" jt="2003" />
+			<fk name="Fk_procedure.level_procedure" virtual="y" to_schema="basepad" to_table="procedure" >
+				<fk_column name="*" pk="level" />
+			</fk>
+		</table>
+		<table name="procedure.level.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.level.name_procedure.level" virtual="y" to_schema="basepad" to_table="procedure.level" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedure.paymentMethod" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="array" jt="2003" />
+			<fk name="Fk_procedure.paymentMethod_procedure" virtual="y" to_schema="basepad" to_table="procedure" >
+				<fk_column name="*" pk="paymentMethod" />
+			</fk>
+		</table>
+		<table name="procedure.paymentMethod.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.paymentMethod.name_procedure.paymentMethod" virtual="y" to_schema="basepad" to_table="procedure.paymentMethod" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedure.providedAgency.workflow.dynamicForm.reportTemplate" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+		</table>
+		<table name="procedure.sector" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="code" type="string" jt="12" />
+			<column name="name" type="array" jt="2003" />
+			<index name="Idx_procedure.sector_*" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedure.sector_procedure" virtual="y" to_schema="basepad" to_table="procedure" >
+				<fk_column name="*" pk="sector" />
+			</fk>
+		</table>
+		<table name="procedure.sector.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.sector.name_procedure.sector" virtual="y" to_schema="basepad" to_table="procedure.sector" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedure.translate" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[ngôn ngữ]]></comment>
+			</column>
+			<column name="name" type="string" jt="12" />
+			<column name="applyMethod" type="string" jt="12" />
+			<column name="angencyIssued" type="string" jt="12" >
+				<comment><![CDATA[cơ quan ban hành]]></comment>
+			</column>
+			<column name="processingTime" type="string" jt="12" >
+				<comment><![CDATA[thời gian thực hiện]]></comment>
+			</column>
+			<column name="results" type="string" jt="12" >
+				<comment><![CDATA[kết quả thực hiện]]></comment>
+			</column>
+			<column name="requirement" type="string" jt="12" >
+				<comment><![CDATA[yêu cầu điều kiện]]></comment>
+			</column>
+			<column name="legalGrounds" type="string" jt="12" >
+				<comment><![CDATA[Căn cứ p lý]]></comment>
+			</column>
+			<column name="steps" type="string" jt="12" >
+				<comment><![CDATA[trình tự thực hiện]]></comment>
+			</column>
+			<column name="implementMethod" type="string" jt="12" >
+				<comment><![CDATA[Cách thức thực hiện]]></comment>
+			</column>
+			<column name="implementer" type="string" jt="12" >
+				<comment><![CDATA[Mô tả đối tượng thực hiện]]></comment>
+			</column>
+			<column name="dossierComponent" type="string" jt="12" >
+				<comment><![CDATA[thành phần hồ sơ]]></comment>
+			</column>
+			<column name="fee" type="string" jt="12" />
+			<column name="serviceFee" type="string" jt="12" >
+				<comment><![CDATA[Phí, lệ phí]]></comment>
+			</column>
+			<column name="agencyAccept" type="string" jt="12" >
+				<comment><![CDATA[cơ quan thực hiện]]></comment>
+			</column>
+			<column name="agencyCombination" type="string" jt="12" >
+				<comment><![CDATA[Cơ quan phối hợp]]></comment>
+			</column>
+			<fk name="Fk_procedure.content_procedure" virtual="y" to_schema="basepad" to_table="procedure" >
+				<fk_column name="*" pk="translate" />
+			</fk>
+		</table>
+		<table name="procedure.workflow.form" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="string" jt="12" />
+			<column name="dateApplied" type="date" jt="91" />
+			<fk name="Fk_procedure.workflow.form_procedure.workflow" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition" />
+		</table>
+		<table name="procedure.workflow.reportTemplate.type" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="array" jt="2003" />
+		</table>
+		<table name="procedure.workflow.reportTemplate.type.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.workflow.reportTemplate.type.name_procedure.workflow.reportTemplate.type" virtual="y" to_schema="basepad" to_table="procedure.workflow.reportTemplate.type" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedureForm" >
+			<comment><![CDATA[Giấy tờ thủ tục]]></comment>
+			<column name="_id" type="oid" jt="-8" mandatory="y" >
+				<comment><![CDATA[Trường hợp]]></comment>
+			</column>
+			<column name="procedureProcessDefinition" prior="case" type="object" jt="4999544" />
+			<column name="procedure" type="object" jt="4999544" mandatory="y" />
+			<column name="detail" type="array" jt="2003" mandatory="y" />
+			<column name="requirement" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[Yêu cầu]]></comment>
+			</column>
+			<column name="defaultDirectly" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[Mặc định trực tiếp]]></comment>
+			</column>
+			<column name="defaultOnline" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[Mặc định trực tuyến]]></comment>
+			</column>
+			<column name="form" type="object" jt="4999544" />
+			<column name="file" type="array" jt="2003" />
+			<column name="deploymentId" type="oid" jt="-8" mandatory="y" />
+			<column name="status" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[Trạng thái 0 đóng 1 mở]]></comment>
+			</column>
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updatedDate" type="date" jt="91" mandatory="y" />
+		</table>
+		<table name="procedureForm.detail" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="type" type="object" jt="4999544" >
+				<comment><![CDATA[loại bản]]></comment>
+			</column>
+			<column name="quantity" type="integer" jt="4" >
+				<comment><![CDATA[số lượng]]></comment>
+			</column>
+			<fk name="Fk_procedure.form.detail_procedure.form" virtual="y" to_schema="basepad" to_table="procedureForm" >
+				<fk_column name="*" pk="detail" />
+			</fk>
+		</table>
+		<table name="procedureForm.detail.type" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" mandatory="y" />
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<index name="Idx_procedureForm.case_*_0" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedure.form.detail.type_procedure.form.detail" virtual="y" to_schema="basepad" to_table="procedureForm.detail" >
+				<fk_column name="*" pk="type" />
+			</fk>
+		</table>
+		<table name="procedureForm.detail.type.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.form.detail.type.name_procedure.form.detail.type" virtual="y" to_schema="basepad" to_table="procedureForm.detail.type" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedureForm.file" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="filename" type="string" jt="12" mandatory="y" />
+			<column name="size" type="long" jt="-1" mandatory="y" />
+			<fk name="Fk_procedure.form.form_procedure.form" virtual="y" to_schema="basepad" to_table="procedureForm" >
+				<fk_column name="*" pk="file" />
+			</fk>
+		</table>
+		<table name="procedureForm.form" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" mandatory="y" />
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<column name="code" type="string" jt="12" />
+			<index name="Idx_procedureForm.case_*_1" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedureForm.form_procedureForm" virtual="y" to_schema="basepad" to_table="procedureForm" >
+				<fk_column name="*" pk="form" />
+			</fk>
+		</table>
+		<table name="procedureForm.form.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedureForm.form.name_procedureForm.form" virtual="y" to_schema="basepad" to_table="procedureForm.form" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedureForm.procedure" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<index name="Idx_procedureForm.procedure_*" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedureForm.procedure_procedureForm" virtual="y" to_schema="basepad" to_table="procedureForm" >
+				<fk_column name="*" pk="procedure" />
+			</fk>
+		</table>
+		<table name="procedureForm.procedureProcessDefinition" prior="procedureForm.case" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" mandatory="y" />
+			<index name="Idx_procedureForm.case_*" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedureForm.case_procedureForm" virtual="y" to_schema="basepad" to_table="procedureForm" >
+				<fk_column name="*" pk="procedureProcessDefinition" />
+			</fk>
+		</table>
+		<table name="procedureForm.procedureProcessDefinition.name" prior="procedureForm.case.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedureForm.case.name_procedureForm.case" virtual="y" to_schema="basepad" to_table="procedureForm.procedureProcessDefinition" />
+		</table>
+		<table name="procedureLevel" >
+			<comment><![CDATA[Bảng mức độ thủ tục (1,2,3,4)]]></comment>
+			<column name="_id" type="oid" jt="-8" mandatory="y" />
+			<column name="name" type="string" jt="12" />
+			<column name="status" type="integer" jt="4" />
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updatedDate" type="date" jt="91" />
+		</table>
+		<table name="procedureProcessDefinition" >
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="array" jt="2003" />
+			<column name="procedure" type="object" jt="4999544" mandatory="y" />
+			<column name="processDefinition" type="object" jt="4999544" mandatory="y" />
+			<column name="startDate" type="date" jt="91" />
+			<column name="endDate" type="date" jt="91" />
+			<column name="isApplied" type="integer" jt="4" >
+				<comment><![CDATA[Áp dụng cho thủ tục]]></comment>
+			</column>
+			<column name="deploymentId" type="oid" jt="-8" mandatory="y" />
+			<column name="firstTask" type="object" jt="4999544" />
+			<column name="status" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[Trạng thái
+0 đóng 1 mở]]></comment>
+			</column>
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updatedDate" type="date" jt="91" mandatory="y" />
+		</table>
+		<table name="procedureProcessDefinition.firstTask" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="candidateGroup" type="array" jt="2003" />
+			<column name="candidateUser" type="array" jt="2003" />
+			<index name="Idx_procedureProcessDefinition.firstTask_*" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedureProcessDefinition.firstTask_procedureProcessDefinition" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition" >
+				<fk_column name="*" pk="firstTask" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.firstTask.candidateGroup" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="code" type="string" jt="12" />
+			<fk name="Fk_procedureProcessDefinition.firstTask.candidateGroup_procedureProcessDefinition.firstTask" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.firstTask" >
+				<fk_column name="*" pk="candidateGroup" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.firstTask.candidateUser" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="username" type="array" jt="2003" />
+			<fk name="Fk_procedureProcessDefinition.firstTask.candidateUser_procedureProcessDefinition.firstTask" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.firstTask" >
+				<fk_column name="*" pk="candidateUser" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.firstTask.candidateUser.username" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="value" type="string" jt="12" />
+			<fk name="Fk_procedureProcessDefinition.firstTask.candidateUser.username_procedureProcessDefinition.firstTask.candidateUser" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.firstTask.candidateUser" >
+				<fk_column name="*" pk="username" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.name" prior="procedureForm.detail.type.name_0" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedureProcessDefinition.name_procedureProcessDefinition" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.procedure" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" mandatory="y" />
+			<column name="code" type="string" jt="12" mandatory="y" />
+			<column name="sector" type="object" jt="4999544" mandatory="y" />
+			<column name="agency" type="object" jt="4999544" />
+			<column name="translate" type="array" jt="2003" mandatory="y" />
+			<fk name="Fk_procedureProcessDefinition.procedure_procedureProcessDefinition" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition" >
+				<fk_column name="*" pk="procedure" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.procedure.agency" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<fk name="Fk_procedureProcessDefinition.procedure.agency_procedureProcessDefinition.procedure" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.procedure" >
+				<fk_column name="*" pk="agency" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.procedure.sector" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="code" type="string" jt="12" />
+			<column name="name" type="array" jt="2003" />
+			<index name="Idx_procedureProcessDefinition.procedure.sector_*" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedureProcessDefinition.procedure.sector_procedureProcessDefinition.procedure" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.procedure" >
+				<fk_column name="*" pk="sector" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.procedure.sector.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedureProcessDefinition.procedure.sector.name_procedureProcessDefinition.procedure.sector" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.procedure.sector" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.procedure.translate" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedureProcessDefinition.procedure.name_procedureProcessDefinition.procedure" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.procedure" >
+				<fk_column name="*" pk="translate" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.processDefinition" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="string" jt="12" />
+			<column name="activiti" type="object" jt="4999544" />
+			<column name="processingTime" type="long" jt="-1" />
+			<column name="processingTimeUnit" type="string" jt="12" />
+			<column name="reportTemplate" type="array" jt="2003" />
+			<column name="eForm" type="object" jt="4999544" />
+			<column name="applicantEForm" type="object" jt="4999544" />
+			<column name="timesheet" type="object" jt="4999544" />
+			<fk name="Fk_procedureProcessDefinition.processDefinition_procedureProcessDefinition" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition" >
+				<fk_column name="*" pk="processDefinition" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.processDefinition.activiti" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="string" jt="12" />
+			<column name="model" type="object" jt="4999544" />
+			<index name="Idx_procedureProcessDefinition.processDefinition.ac" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedureProcessDefinition.processDefinition.activiti_procedureProcessDefinition.processDefinition" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.processDefinition" >
+				<fk_column name="*" pk="activiti" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.processDefinition.activiti.model" prior="Collection_1" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="string" jt="12" />
+			<column name="name" type="string" jt="12" />
+			<column name="project" type="object" jt="4999544" />
+			<index name="Idx_procedureProcessDefinition.processDefinition.ac_1" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedureProcessDefinition.processDefinition.activiti.model_procedureProcessDefinition.processDefinition.activiti" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.processDefinition.activiti" >
+				<fk_column name="*" pk="model" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.processDefinition.activiti.model.project" prior="procedureProcessDefinition.processDefinition.activiti.project" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="string" jt="12" />
+			<index name="Idx_procedureProcessDefinition.processDefinition.ac_0" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedureProcessDefinition.processDefinition.activiti.model.project_procedureProcessDefinition.processDefinition.activiti.model" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.processDefinition.activiti.model" >
+				<fk_column name="*" pk="project" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.processDefinition.applicantEForm" prior="procedureProcessDefinition.processDefinition.reportTemplate_0" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="string" jt="12" />
+			<index name="Idx_procedureProcessDefinition.processDefinition.ap" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedureProcessDefinition.processDefinition.applicantEForm_procedureProcessDefinition.processDefinition" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.processDefinition" >
+				<fk_column name="*" pk="applicantEForm" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.processDefinition.eForm" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="string" jt="12" />
+			<index name="Idx_procedureProcessDefinition.processDefinition.eF" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedureProcessDefinition.processDefinition.eForm_procedureProcessDefinition.processDefinition" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.processDefinition" >
+				<fk_column name="*" pk="eForm" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.processDefinition.reportTemplate" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="type" type="object" jt="4999544" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedureProcessDefinition.processDefinition.reportTemplate_procedureProcessDefinition.processDefinition" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.processDefinition" >
+				<fk_column name="*" pk="reportTemplate" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.processDefinition.reportTemplate.type" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="array" jt="2003" />
+			<index name="Idx_procedureProcessDefinition.processDefinition.re" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedureProcessDefinition.processDefinition.reportTemplate.type_procedureProcessDefinition.processDefinition.reportTemplate" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.processDefinition.reportTemplate" >
+				<fk_column name="*" pk="type" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.processDefinition.reportTemplate.type.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedureProcessDefinition.processDefinition.reportTemplate.type.name_procedureProcessDefinition.processDefinition.reportTemplate.type" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.processDefinition.reportTemplate.type" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procedureProcessDefinition.processDefinition.timesheet" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="string" jt="12" />
+			<index name="Idx_procedureProcessDefinition.processDefinition.ti" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedureProcessDefinition.processDefinition.timesheet_procedureProcessDefinition.processDefinition" virtual="y" to_schema="basepad" to_table="procedureProcessDefinition.processDefinition" >
+				<fk_column name="*" pk="timesheet" />
+			</fk>
+		</table>
+		<table name="procost" >
+			<comment><![CDATA[bảng phí, lệ phí thủ tục]]></comment>
+			<column name="_id" type="oid" jt="-8" mandatory="y" />
+			<column name="type" type="object" jt="4999544" mandatory="y" >
+				<comment><![CDATA[loại phí, lệ phí]]></comment>
+			</column>
+			<column name="procedure" type="object" jt="4999544" mandatory="y" />
+			<column name="monetaryUnit" type="object" jt="4999544" >
+				<comment><![CDATA[đơn vị tiền tệ]]></comment>
+			</column>
+			<column name="description" type="string" jt="12" />
+			<column name="cost" type="double" jt="8" >
+				<comment><![CDATA[số tiền]]></comment>
+			</column>
+			<column name="default" type="integer" jt="4" >
+				<comment><![CDATA[mặc định]]></comment>
+			</column>
+			<column name="required" type="integer" jt="4" >
+				<comment><![CDATA[Bắt buộc]]></comment>
+			</column>
+			<column name="advance" type="object" jt="4999544" >
+				<comment><![CDATA[Nâng cao]]></comment>
+			</column>
+			<column name="deploymentId" type="oid" jt="-8" mandatory="y" />
+			<column name="status" type="integer" jt="4" >
+				<comment><![CDATA[trạng thái 0 đóng 1 mở]]></comment>
+			</column>
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updatedDate" type="date" jt="91" mandatory="y" />
+		</table>
+		<table name="procost.advance" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="applyMethod" type="object" jt="4999544" >
+				<comment><![CDATA[hình thức]]></comment>
+			</column>
+			<column name="cost" type="double" jt="8" >
+				<comment><![CDATA[số tiền]]></comment>
+			</column>
+			<column name="default" type="integer" jt="4" />
+			<column name="required" type="integer" jt="4" />
+			<fk name="Fk_procedure.procost.advance_procedure.procost" virtual="y" to_schema="basepad" to_table="procost" >
+				<fk_column name="*" pk="advance" />
+			</fk>
+		</table>
+		<table name="procost.advance.applyMethod" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<index name="Idx_procedure.procost.advance.applyMethod_*" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedure.procost.advance.applyMethod_procedure.procost.advance" virtual="y" to_schema="basepad" to_table="procost.advance" >
+				<fk_column name="*" pk="applyMethod" />
+			</fk>
+		</table>
+		<table name="procost.monetaryUnit" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="string" jt="12" />
+			<index name="Idx_procedure.procost.monetaryUnit_*" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procedure.procost.monetaryUnit_procedure.procost" virtual="y" to_schema="basepad" to_table="procost" >
+				<fk_column name="*" pk="monetaryUnit" />
+			</fk>
+		</table>
+		<table name="procost.procedure" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<index name="Idx_procost.procedure_*" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procost.procedure_procost" virtual="y" to_schema="basepad" to_table="procost" >
+				<fk_column name="*" pk="procedure" />
+			</fk>
+		</table>
+		<table name="procost.type" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="type" type="integer" jt="4" />
+			<column name="name" type="array" jt="2003" />
+			<column name="quantityEditable" type="integer" jt="4" />
+			<index name="Idx_procost.type" unique="UNIQUE_KEY" >
+				<column name="*" />
+			</index>
+			<fk name="Fk_procost.type_procost" virtual="y" to_schema="basepad" to_table="procost" >
+				<fk_column name="*" pk="type" />
+			</fk>
+		</table>
+		<table name="procost.type.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procedure.agency.name_0_procedure.procost.type" virtual="y" to_schema="basepad" to_table="procost.type" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="procostType" >
+			<comment><![CDATA[Bảng loại phí/ lệ phí]]></comment>
+			<column name="_id" type="oid" jt="-8" mandatory="y" />
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<column name="type" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[Kiểu [0 lệ phí, 1 phí]]]></comment>
+			</column>
+			<column name="quantityEditable" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[Cho phép nhập số lượng]]></comment>
+			</column>
+			<column name="status" type="integer" jt="4" />
+			<column name="deploymentId" type="oid" jt="-8" mandatory="y" />
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updatedDate" type="date" jt="91" />
+		</table>
+		<table name="procostType.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_procostType.name_procostType" virtual="y" to_schema="basepad" to_table="procostType" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="province " prior="prov" >
+			<column name="_id" type="oid" jt="-8" mandatory="y" />
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<column name="describe" type="string" jt="12" mandatory="y" />
+			<column name="acreage" type="integer" jt="4" mandatory="y" />
+			<column name="image" type="string" jt="12" mandatory="y" />
+			<column name="population" type="int" jt="4" mandatory="y" />
+			<column name="status " type="int" jt="4" mandatory="y" />
+			<column name="district" type="oid" jt="-8" mandatory="y" />
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updatedDate" type="date" jt="91" mandatory="y" />
+			<index name="Unq_province __id" unique="UNIQUE_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="province.district" prior="provincce.district" >
+			<column name="*" type="oid" jt="-8" mandatory="y" />
+			<column name=" name " prior="describe" type="array" jt="2003" mandatory="y" />
+			<column name="describe" prior="acreage" type="string" jt="12" mandatory="y" />
+			<column name="acreage" prior="image" type="integer" jt="4" mandatory="y" />
+			<column name="image" prior="population" type="string" jt="12" mandatory="y" />
+			<column name="population" prior="status " type="integer" jt="4" mandatory="y" />
+			<column name="status " type="integer" jt="4" mandatory="y" />
+			<fk name="fk_provincce.district" virtual="y" to_schema="basepad" to_table="province " >
+				<fk_column name="*" pk="district" />
+			</fk>
+		</table>
+		<table name="province.name" prior="Collection_1" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="fk_province.name_province " virtual="y" to_schema="basepad" to_table="province " >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="sector" >
+			<comment><![CDATA[Bảng Lĩnh vực thủ tục]]></comment>
+			<column name="_id" type="oid" jt="-8" mandatory="y" />
+			<column name="parent" type="object" jt="4999544" >
+				<comment><![CDATA[lĩnh vực cha]]></comment>
+			</column>
+			<column name="code" type="string" jt="12" mandatory="y" />
+			<column name="name" type="array" jt="2003" mandatory="y" />
+			<column name="deploymentId" type="oid" jt="-8" mandatory="y" />
+			<column name="status" type="integer" jt="4" mandatory="y" />
+			<column name="createdDate" type="date" jt="91" mandatory="y" />
+			<column name="updatedDate" type="date" jt="91" />
+		</table>
+		<table name="sector.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_sector.name_sector" virtual="y" to_schema="basepad" to_table="sector" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+		<table name="sector.parent" >
+			<column name="*" type="object" jt="4999544" mandatory="y" />
+			<column name="id" type="oid" jt="-8" />
+			<column name="name" type="array" jt="2003" />
+			<fk name="Fk_sector.parentSector_sector" virtual="y" to_schema="basepad" to_table="sector" >
+				<fk_column name="*" pk="parent" />
+			</fk>
+		</table>
+		<table name="sector.parent.name" >
+			<column name="*" type="array" jt="2003" mandatory="y" />
+			<column name="languageId" type="integer" jt="4" />
+			<column name="name" type="string" jt="12" />
+			<fk name="Fk_sector.parentSector.name_sector.parentSector" virtual="y" to_schema="basepad" to_table="sector.parent" >
+				<fk_column name="*" pk="name" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="MongoDb" database="MongoDb" driver_class="com.dbschema.MongoJdbcDriver" driver_jar="mongojdbc3.1.jar" driver_desc="No Authentication" host="localhost" port="27017" user="admin" />
+	<connector name="MongoDb" database="MongoDb" driver_class="com.dbschema.MongoJdbcDriver" driver_jar="mongojdbc3.1.jar" driver_desc="No Authentication" host="localhost" port="27017" user="admin" />
+	<layout name="Default Layout" id="Layout_19c2" joined_routing="y" show_column_type="y" show_relation="cascade" >
+		<entity schema="basepad" name="configuration" color="C1D8EE" x="512" y="2064" />
+		<entity schema="basepad" name="configuration.banner" color="3986C1" x="752" y="2192" />
+		<entity schema="basepad" name="configuration.link" color="C1D8EE" x="288" y="2080" />
+		<entity schema="basepad" name="configuration.link.logo" color="3986C1" x="64" y="2176" />
+		<entity schema="basepad" name="configuration.link.name" color="3986C1" x="80" y="2048" />
+		<entity schema="basepad" name="configuration.logo" color="3986C1" x="752" y="2048" />
+		<entity schema="basepad" name="form" color="C1D8EE" x="64" y="224" />
+		<entity schema="basepad" name="form.name" color="3986C1" x="256" y="224" />
+		<entity schema="basepad" name="menu" color="C1D8EE" x="272" y="1680" />
+		<entity schema="basepad" name="menu.children" color="3986C1" x="96" y="1680" />
+		<entity schema="basepad" name="menu.children.name" color="3986C1" x="80" y="1824" />
+		<entity schema="basepad" name="menu.name" color="3986C1" x="480" y="1680" />
+		<entity schema="basepad" name="menuConfiguration" color="3986C1" x="768" y="1776" />
+		<entity schema="basepad" name="menuConfiguration.agency" color="C1D8EE" x="528" y="1792" />
+		<entity schema="basepad" name="menuConfiguration.agency.name" color="3986C1" x="512" y="1904" />
+		<entity schema="basepad" name="menuConfiguration.menu" color="C1D8EE" x="976" y="1760" />
+		<entity schema="basepad" name="menuConfiguration.menu.children" color="3986C1" x="1232" y="1872" />
+		<entity schema="basepad" name="menuConfiguration.menu.children.name" color="3986C1" x="944" y="1936" />
+		<entity schema="basepad" name="menuConfiguration.menu.name" color="C1D8EE" x="1216" y="1744" />
+		<entity schema="basepad" name="procedure" color="C1D8EE" x="576" y="640" />
+		<entity schema="basepad" name="procedure.agency" color="3986C1" x="320" y="832" />
+		<entity schema="basepad" name="procedure.agencyLevel" color="3986C1" x="320" y="560" />
+		<entity schema="basepad" name="procedure.agencyLevel.name" color="3986C1" x="96" y="560" />
+		<entity schema="basepad" name="procedure.angency.name" color="3986C1" x="64" y="816" />
+		<entity schema="basepad" name="procedure.angencyIssued" color="3986C1" x="304" y="1008" />
+		<entity schema="basepad" name="procedure.angencyIssued.name" color="3986C1" x="64" y="1008" />
+		<entity schema="basepad" name="procedure.applyMethod" color="C1D8EE" x="320" y="720" />
+		<entity schema="basepad" name="procedure.applyMethod.name" color="3986C1" x="64" y="688" />
+		<entity schema="basepad" name="procedure.children" color="C1D8EE" x="848" y="1072" />
+		<entity schema="basepad" name="procedure.children.agency" color="C1D8EE" x="1040" y="1104" />
+		<entity schema="basepad" name="procedure.implementer" color="3986C1" x="832" y="928" />
+		<entity schema="basepad" name="procedure.implementer.name" color="3986C1" x="1040" y="960" />
+		<entity schema="basepad" name="procedure.level" color="C1D8EE" x="816" y="528" />
+		<entity schema="basepad" name="procedure.level.name" color="3986C1" x="1024" y="512" />
+		<entity schema="basepad" name="procedure.paymentMethod" color="C1D8EE" x="816" y="816" />
+		<entity schema="basepad" name="procedure.paymentMethod.name" color="3986C1" x="1056" y="832" />
+		<entity schema="basepad" name="procedure.sector" color="C1D8EE" x="832" y="656" />
+		<entity schema="basepad" name="procedure.sector.name" color="C1D8EE" x="1024" y="672" />
+		<entity schema="basepad" name="procedure.translate" color="C1D8EE" x="1296" y="752" />
+		<entity schema="basepad" name="procedureForm" color="C1D8EE" x="2080" y="1024" />
+		<entity schema="basepad" name="procedureForm.detail" color="C1D8EE" x="2320" y="1120" />
+		<entity schema="basepad" name="procedureForm.detail.type" color="3986C1" x="2512" y="1120" />
+		<entity schema="basepad" name="procedureForm.detail.type.name" color="3986C1" x="2512" y="1232" />
+		<entity schema="basepad" name="procedureForm.file" color="3986C1" x="1792" y="1248" />
+		<entity schema="basepad" name="procedureForm.form" color="3986C1" x="1888" y="1120" />
+		<entity schema="basepad" name="procedureForm.form.name" color="3986C1" x="1648" y="1120" />
+		<entity schema="basepad" name="procedureForm.procedure" color="3986C1" x="1840" y="1008" />
+		<entity schema="basepad" name="procedureForm.procedureProcessDefinition" color="3986C1" x="2432" y="976" />
+		<entity schema="basepad" name="procedureProcessDefinition" color="C1D8EE" x="1984" y="608" />
+		<entity schema="basepad" name="procedureProcessDefinition.firstTask" color="C1D8EE" x="2240" y="720" />
+		<entity schema="basepad" name="procedureProcessDefinition.firstTask.candidateGroup" color="3986C1" x="2608" y="640" />
+		<entity schema="basepad" name="procedureProcessDefinition.firstTask.candidateUser" color="3986C1" x="2528" y="752" />
+		<entity schema="basepad" name="procedureProcessDefinition.firstTask.candidateUser.username" color="C1D8EE" x="2944" y="768" />
+		<entity schema="basepad" name="procedureProcessDefinition.name" color="3986C1" x="2240" y="592" />
+		<entity schema="basepad" name="procedureProcessDefinition.procedure" color="3986C1" x="1648" y="432" />
+		<entity schema="basepad" name="procedureProcessDefinition.procedure.agency" color="C1D8EE" x="1616" y="624" />
+		<entity schema="basepad" name="procedureProcessDefinition.procedure.sector" color="3986C1" x="1616" y="208" />
+		<entity schema="basepad" name="procedureProcessDefinition.procedure.sector.name" color="3986C1" x="1968" y="176" />
+		<entity schema="basepad" name="procedureProcessDefinition.procedure.translate" color="3986C1" x="1616" y="768" />
+		<entity schema="basepad" name="procedureProcessDefinition.processDefinition" color="3986C1" x="2176" y="272" />
+		<entity schema="basepad" name="procedureProcessDefinition.processDefinition.activiti" color="C1D8EE" x="2576" y="208" />
+		<entity schema="basepad" name="procedureProcessDefinition.processDefinition.activiti.model" color="C1D8EE" x="2480" y="80" />
+		<entity schema="basepad" name="procedureProcessDefinition.processDefinition.activiti.model.project" color="C1D8EE" x="3008" y="192" />
+		<entity schema="basepad" name="procedureProcessDefinition.processDefinition.applicantEForm" color="3986C1" x="2528" y="416" />
+		<entity schema="basepad" name="procedureProcessDefinition.processDefinition.eForm" color="C1D8EE" x="2592" y="528" />
+		<entity schema="basepad" name="procedureProcessDefinition.processDefinition.reportTemplate" color="C1D8EE" x="2560" y="304" />
+		<entity schema="basepad" name="procedureProcessDefinition.processDefinition.reportTemplate.type" color="C1D8EE" x="3008" y="288" />
+		<entity schema="basepad" name="procedureProcessDefinition.processDefinition.reportTemplate.type.name" color="C1D8EE" x="3024" y="480" />
+		<entity schema="basepad" name="procedureProcessDefinition.processDefinition.timesheet" color="C1D8EE" x="2000" y="480" />
+		<entity schema="basepad" name="procost" color="C1D8EE" x="512" y="1328" />
+		<entity schema="basepad" name="procost.advance" color="C1D8EE" x="288" y="1472" />
+		<entity schema="basepad" name="procost.advance.applyMethod" color="C1D8EE" x="48" y="1488" />
+		<entity schema="basepad" name="procost.monetaryUnit" color="3986C1" x="720" y="1456" />
+		<entity schema="basepad" name="procost.procedure" color="C1D8EE" x="736" y="1344" />
+		<entity schema="basepad" name="procost.type" color="C1D8EE" x="288" y="1328" />
+		<entity schema="basepad" name="procost.type.name" color="3986C1" x="80" y="1344" />
+		<entity schema="basepad" name="procostType" color="C1D8EE" x="480" y="224" />
+		<entity schema="basepad" name="procostType.name" color="C1D8EE" x="704" y="224" />
+		<entity schema="basepad" name="province " color="C1D8EE" x="1760" y="1680" />
+		<entity schema="basepad" name="province.district" color="C1D8EE" x="1984" y="1680" />
+		<entity schema="basepad" name="province.name" color="C1D8EE" x="1536" y="1712" />
+		<entity schema="basepad" name="sector" color="C1D8EE" x="928" y="208" />
+		<entity schema="basepad" name="sector.name" color="C1D8EE" x="1120" y="320" />
+		<entity schema="basepad" name="sector.parent" color="C1D8EE" x="1120" y="208" />
+		<entity schema="basepad" name="sector.parent.name" color="C1D8EE" x="1296" y="208" />
+		<group name="Lĩnh vực thủ tục" color="C4E0F9" >
+			<entity schema="basepad" name="sector" />
+			<entity schema="basepad" name="sector.name" />
+			<entity schema="basepad" name="sector.parent" />
+			<entity schema="basepad" name="sector.parent.name" />
+		</group>
+		<group name="Loại phí/ lệ phí" color="C4E0F9" >
+			<entity schema="basepad" name="procostType" />
+			<entity schema="basepad" name="procostType.name" />
+		</group>
+		<group name="Thủ tục hành chính" color="C4E0F9" >
+			<entity schema="basepad" name="procedure" />
+			<entity schema="basepad" name="procedure.level" />
+			<entity schema="basepad" name="procedure.paymentMethod" />
+			<entity schema="basepad" name="procedure.sector" />
+			<entity schema="basepad" name="procedure.sector.name" />
+			<entity schema="basepad" name="procedure.translate" />
+			<entity schema="basepad" name="procedure.applyMethod" />
+			<entity schema="basepad" name="procedure.applyMethod.name" />
+			<entity schema="basepad" name="procedure.level.name" />
+			<entity schema="basepad" name="procedure.paymentMethod.name" />
+			<entity schema="basepad" name="procedure.agencyLevel" />
+			<entity schema="basepad" name="procedure.agency" />
+			<entity schema="basepad" name="procedure.angency.name" />
+			<entity schema="basepad" name="procedure.agencyLevel.name" />
+			<entity schema="basepad" name="procedure.children" />
+			<entity schema="basepad" name="procedure.children.agency" />
+			<entity schema="basepad" name="procedure.implementer" />
+			<entity schema="basepad" name="procedure.implementer.name" />
+		</group>
+		<group name="Giấy tờ" color="C4E0F9" >
+			<entity schema="basepad" name="form" />
+			<entity schema="basepad" name="form.name" />
+		</group>
+		<group name="Cấu hình trang dịch vụ công" color="C4E0F9" >
+			<entity schema="basepad" name="menu" />
+			<entity schema="basepad" name="menu.name" />
+			<entity schema="basepad" name="menuConfiguration" />
+			<entity schema="basepad" name="menuConfiguration.menu" />
+			<entity schema="basepad" name="configuration" />
+			<entity schema="basepad" name="configuration.banner" />
+			<entity schema="basepad" name="configuration.link" />
+			<entity schema="basepad" name="configuration.link.logo" />
+			<entity schema="basepad" name="menuConfiguration.menu.children" />
+			<entity schema="basepad" name="configuration.logo" />
+			<entity schema="basepad" name="menuConfiguration.agency" />
+			<entity schema="basepad" name="menuConfiguration.agency.name" />
+			<entity schema="basepad" name="menuConfiguration.menu.children.name" />
+			<entity schema="basepad" name="menuConfiguration.menu.name" />
+			<entity schema="basepad" name="configuration.link.name" />
+			<entity schema="basepad" name="menu.children" />
+			<entity schema="basepad" name="menu.children.name" />
+		</group>
+		<group name="Giấy tờ thủ tục" color="C4E0F9" >
+			<entity schema="basepad" name="procedureForm.form.name" />
+			<entity schema="basepad" name="procedureForm.file" />
+			<entity schema="basepad" name="procedureForm.form" />
+			<entity schema="basepad" name="procedureForm.procedure" />
+			<entity schema="basepad" name="procedureForm.procedureProcessDefinition" />
+			<entity schema="basepad" name="procedureForm.detail" />
+			<entity schema="basepad" name="procedureForm.detail.type" />
+			<entity schema="basepad" name="procedureForm.detail.type.name" />
+			<entity schema="basepad" name="procedureForm" />
+		</group>
+		<group name="Phí, lệ phí thủ tục" color="C4E0F9" >
+			<entity schema="basepad" name="procost" />
+			<entity schema="basepad" name="procost.procedure" />
+			<entity schema="basepad" name="procost.monetaryUnit" />
+			<entity schema="basepad" name="procost.type" />
+			<entity schema="basepad" name="procost.type.name" />
+			<entity schema="basepad" name="procost.advance" />
+			<entity schema="basepad" name="procost.advance.applyMethod" />
+		</group>
+		<group name="Quy trình thủ tục" color="C4E0F9" >
+			<entity schema="basepad" name="procedureProcessDefinition.firstTask.candidateUser.username" />
+			<entity schema="basepad" name="procedureProcessDefinition" />
+			<entity schema="basepad" name="procedureProcessDefinition.procedure.translate" />
+			<entity schema="basepad" name="procedureProcessDefinition.procedure" />
+			<entity schema="basepad" name="procedureProcessDefinition.procedure.sector" />
+			<entity schema="basepad" name="procedureProcessDefinition.procedure.sector.name" />
+			<entity schema="basepad" name="procedureProcessDefinition.processDefinition" />
+			<entity schema="basepad" name="procedureProcessDefinition.firstTask" />
+			<entity schema="basepad" name="procedureProcessDefinition.firstTask.candidateGroup" />
+			<entity schema="basepad" name="procedureProcessDefinition.firstTask.candidateUser" />
+			<entity schema="basepad" name="procedureProcessDefinition.processDefinition.reportTemplate" />
+			<entity schema="basepad" name="procedureProcessDefinition.processDefinition.reportTemplate.type.name" />
+		</group>
+		<group name="Danh mục địa danh " color="C4E0F9" >
+			<entity schema="basepad" name="province.district" />
+			<entity schema="basepad" name="province " />
+			<entity schema="basepad" name="province.name" />
+		</group>
+		<script name="*" id="Editor_1c34" language="SQL" >
+			<string><![CDATA[
+basepad.getCollection('procedureOfAgency.workflow.eForm').find()]]></string>
+		</script>
+		<form name="Report" id="Report_1a13" template="Page" css="container-fluid" view="frame" >
+			<body name="Body" template="Grid" pos="0,0,0,0,f,f" layout="{{-2},{-2}}" scroll="n" html="n" />
+		</form>
+	</layout>
+</project>

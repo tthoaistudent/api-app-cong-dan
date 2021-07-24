@@ -1,0 +1,6781 @@
+openapi: 3.0.1
+info:
+  title: ServiceTitle
+  description: ServiceDescription
+  contact: {}
+  license: {}
+  version: 1.0.0
+servers:
+- url: //digo-api.vnptigate.vn:80/
+tags:
+- name: agency-config-controller
+  description: Agency Config Controller
+- name: all-config-controller
+  description: All Config Controller
+- name: configuration-controller
+  description: Configuration Controller
+- name: default-config-controller
+  description: Default Config Controller
+- name: form-controller
+  description: Form Controller
+- name: generator-controller
+  description: Generator Controller
+- name: menu-configuration-controller
+  description: Menu Configuration Controller
+- name: menu-controller
+  description: Menu Controller
+- name: procedure-config-controller
+  description: Procedure Config Controller
+- name: procedure-controller
+  description: Procedure Controller
+- name: procedure-form
+  description: Procedure Form
+- name: procedure-process-definition-controller
+  description: Procedure Process Definition Controller
+- name: process-definition-task-controller
+  description: Process Definition Task Controller
+- name: procost-controller
+  description: Procost Controller
+- name: procost-type-controller
+  description: Procost Type Controller
+- name: sector-controller
+  description: Sector Controller
+- name: sync-procedure-statu-controller
+  description: Sync Procedure Statu Controller
+paths:
+  /agency-config:
+    get:
+      tags:
+      - agency-config-controller
+      summary: getAgencyConfigPage
+      operationId: getAgencyConfigPageUsingGET
+      parameters:
+      - name: agency-id
+        in: query
+        description: agency-id
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pattern-id
+        in: query
+        description: pattern-id
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetAgencyConfigDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+      - agency-config-controller
+      summary: addMenuConfiguration
+      operationId: addMenuConfigurationUsingPOST
+      requestBody:
+        description: postAgencyConfigDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostAgencyConfigDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostResponseDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: postAgencyConfigDto
+  /agency-config/delete-pattern/{id}:
+    delete:
+      tags:
+      - agency-config-controller
+      summary: deleteByPattern
+      operationId: deleteByPatternUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /agency-config/delete-template/{id}:
+    delete:
+      tags:
+      - agency-config-controller
+      summary: deleteByTemplate
+      operationId: deleteByTemplateUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /agency-config/pattern/--list:
+    get:
+      tags:
+      - agency-config-controller
+      summary: getAgencyConfigByPatternPage
+      operationId: getAgencyConfigByPatternPageUsingGET
+      parameters:
+      - name: agency-id
+        in: query
+        description: agency-id
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pattern-id
+        in: query
+        description: pattern-id
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetAgencyConfByPatDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /agency-config/template/--list:
+    get:
+      tags:
+      - agency-config-controller
+      summary: getAgencyConfigByTemplatePage
+      operationId: getAgencyConfigByTemplatePageUsingGET
+      parameters:
+      - name: agency-id
+        in: query
+        description: agency-id
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: template-id
+        in: query
+        description: template-id
+        schema:
+          type: string
+      - name: type-template-id
+        in: query
+        description: type-template-id
+        schema:
+          type: string
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetAgencyConfByTempDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /agency-config/{id}:
+    get:
+      tags:
+      - agency-config-controller
+      summary: getById
+      operationId: getByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AgencyConfig'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+      - agency-config-controller
+      summary: updateSector
+      operationId: updateSectorUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: putAgencyConfigDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutAgencyConfigDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: putAgencyConfigDto
+    delete:
+      tags:
+      - agency-config-controller
+      summary: deleteSector
+      operationId: deleteSectorUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /config/get-pattern:
+    get:
+      tags:
+      - all-config-controller
+      summary: getAllConfigPage
+      operationId: getAllConfigPageUsingGET
+      parameters:
+      - name: agency-id
+        in: query
+        description: agency-id
+        schema:
+          type: string
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/IdDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /config/get-template:
+    get:
+      tags:
+      - all-config-controller
+      summary: getAllConfigTemplatePage
+      operationId: getAllConfigTemplatePageUsingGET
+      parameters:
+      - name: agency-id
+        in: query
+        description: agency-id
+        schema:
+          type: string
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Template'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /configuration:
+    put:
+      tags:
+      - configuration-controller
+      summary: updateConfiguration
+      operationId: updateConfigurationUsingPUT
+      parameters:
+      - name: deployment-id
+        in: query
+        description: deployment-id
+        schema:
+          type: string
+      requestBody:
+        description: postConfigurationDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostConfigurationDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: postConfigurationDto
+    post:
+      tags:
+      - configuration-controller
+      summary: postConfiguration
+      operationId: postConfigurationUsingPOST
+      requestBody:
+        description: postConfigurationDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostConfigurationDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/IdResponse'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: postConfigurationDto
+  /configuration/--by-deployment-id:
+    get:
+      tags:
+      - configuration-controller
+      summary: getSectors
+      operationId: getSectorsUsingGET
+      parameters:
+      - name: deployment-id
+        in: query
+        description: deployment-id
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetConfigurationDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /default-config:
+    get:
+      tags:
+      - default-config-controller
+      summary: getDefaultConfigPage
+      operationId: getDefaultConfigPageUsingGET
+      parameters:
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pattern-id
+        in: query
+        description: pattern-id
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«DefaultConfig»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+      - default-config-controller
+      summary: addDefaultConfig
+      operationId: addDefaultConfigUsingPOST
+      requestBody:
+        description: postDefaultConfigDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostDefaultConfigDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostResponseDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: postDefaultConfigDto
+  /default-config/--all:
+    get:
+      tags:
+      - default-config-controller
+      summary: getDefaultConfigAll
+      operationId: getDefaultConfigAllUsingGET
+      parameters:
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: pattern-id
+        in: query
+        description: pattern-id
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DefaultConfig'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /default-config/{id}:
+    get:
+      tags:
+      - default-config-controller
+      summary: getById
+      operationId: getByIdUsingGET_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DefaultConfig'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+      - default-config-controller
+      summary: updateDefaultConfig
+      operationId: updateDefaultConfigUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: putDefaultConfigDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutDefaultConfigDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: putDefaultConfigDto
+    delete:
+      tags:
+      - default-config-controller
+      summary: deleteDefaultConfig
+      operationId: deleteDefaultConfigUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /form:
+    get:
+      tags:
+      - form-controller
+      summary: getForms
+      operationId: getFormsUsingGET
+      parameters:
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetFormDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+      - form-controller
+      summary: addForm
+      operationId: addFormUsingPOST
+      requestBody:
+        description: formPayload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostFormDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdResponse'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: formPayload
+  /form/--for-option:
+    get:
+      tags:
+      - form-controller
+      summary: getFormsForCombobox
+      operationId: getFormsForComboboxUsingGET
+      parameters:
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetFormDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /form/{id}:
+    get:
+      tags:
+      - form-controller
+      summary: getForm
+      operationId: getFormUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetFormByIdDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+      - form-controller
+      summary: updateForm
+      operationId: updateFormUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: formPayload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostFormDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: formPayload
+    delete:
+      tags:
+      - form-controller
+      summary: deleteForm
+      operationId: deleteFormUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /generator/barcode/{key}:
+    get:
+      tags:
+      - generator-controller
+      summary: getBarcode
+      operationId: getBarcodeUsingGET
+      parameters:
+      - name: h
+        in: query
+        description: h
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: key
+        in: path
+        description: key
+        required: true
+        schema:
+          type: string
+      - name: w
+        in: query
+        description: w
+        schema:
+          type: integer
+          format: int32
+          default: 300
+      responses:
+        200:
+          description: OK
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /generator/qrcode/{key}:
+    get:
+      tags:
+      - generator-controller
+      summary: getQRcode
+      operationId: getQRcodeUsingGET
+      parameters:
+      - name: h
+        in: query
+        description: h
+        schema:
+          type: integer
+          format: int32
+          default: 300
+      - name: key
+        in: path
+        description: key
+        required: true
+        schema:
+          type: string
+      - name: w
+        in: query
+        description: w
+        schema:
+          type: integer
+          format: int32
+          default: 300
+      responses:
+        200:
+          description: OK
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /menu:
+    get:
+      tags:
+      - menu-controller
+      summary: getMenus
+      operationId: getMenusUsingGET
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetMenuDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /menu-configuration:
+    get:
+      tags:
+      - menu-configuration-controller
+      summary: getByAgencyId
+      operationId: getByAgencyIdUsingGET
+      parameters:
+      - name: agency-id
+        in: query
+        description: agency-id
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetMenuConfigurationDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+      - menu-configuration-controller
+      summary: addMenuConfiguration
+      operationId: addMenuConfigurationUsingPOST_1
+      requestBody:
+        description: postMenuConfigurationDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostMenuConfigurationDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostResponseDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: postMenuConfigurationDto
+  /menu-configuration/--for-category:
+    get:
+      tags:
+      - menu-configuration-controller
+      summary: getMenuByAgencyId
+      operationId: getMenuByAgencyIdUsingGET
+      parameters:
+      - name: agency-id
+        in: query
+        description: agency-id
+        schema:
+          type: string
+      - name: default
+        in: query
+        description: default
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetMenuConfigurationDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /menu-configuration/{id}:
+    get:
+      tags:
+      - menu-configuration-controller
+      summary: getById
+      operationId: getByIdUsingGET_2
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetMenuConfigurationDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+      - menu-configuration-controller
+      summary: updateSector
+      operationId: updateSectorUsingPUT_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: putMenuConfig
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutMenuConfigurationDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: putMenuConfig
+    delete:
+      tags:
+      - menu-configuration-controller
+      summary: deleteSector
+      operationId: deleteSectorUsingDELETE_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /menu/{id}:
+    get:
+      tags:
+      - menu-controller
+      summary: getMenu
+      operationId: getMenuUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetMenuByIdDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /procedure:
+    get:
+      tags:
+      - procedure-controller
+      summary: publicSearch
+      operationId: publicSearchUsingGET
+      parameters:
+      - name: agency-id
+        in: query
+        description: agency-id
+        schema:
+          type: string
+      - name: agency-level-id
+        in: query
+        description: agency-level-id
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: procedure-level-id
+        in: query
+        description: procedure-level-id
+        schema:
+          type: string
+      - name: sector-id
+        in: query
+        description: sector-id
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: status
+        in: query
+        description: status
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetProcedurePublicDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+      - procedure-controller
+      summary: addForm
+      operationId: addFormUsingPOST_1
+      requestBody:
+        description: procedurePayload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProcedureDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostResponseDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: procedurePayload
+  /procedure-config:
+    get:
+      tags:
+      - procedure-config-controller
+      summary: getProcedureConfigPage
+      operationId: getProcedureConfigPageUsingGET
+      parameters:
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pattern-id
+        in: query
+        description: pattern-id
+        schema:
+          type: string
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetProcedureConfigDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+      - procedure-config-controller
+      summary: addAgencyConfig
+      operationId: addAgencyConfigUsingPOST
+      requestBody:
+        description: postProcedureConfigDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProcedureConfigDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostResponseDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: postProcedureConfigDto
+  /procedure-config/bussiness/--list:
+    get:
+      tags:
+      - procedure-config-controller
+      summary: getAgencyConfigByBussinessPage
+      operationId: getAgencyConfigByBussinessPageUsingGET
+      parameters:
+      - name: bussiness
+        in: query
+        description: bussiness
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetProceConfigByBusinessDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /procedure-config/delete-bussiness/{id}:
+    delete:
+      tags:
+      - procedure-config-controller
+      summary: deleteByBussiness
+      operationId: deleteByBussinessUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /procedure-config/delete-jud-civil-status/{id}:
+    delete:
+      tags:
+      - procedure-config-controller
+      summary: deleteByCivil
+      operationId: deleteByCivilUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /procedure-config/delete-jud-record/{id}:
+    delete:
+      tags:
+      - procedure-config-controller
+      summary: deleteByRecord
+      operationId: deleteByRecordUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /procedure-config/delete-pattern/{id}:
+    delete:
+      tags:
+      - procedure-config-controller
+      summary: deleteByPattern
+      operationId: deleteByPatternUsingDELETE_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /procedure-config/delete-template/{id}:
+    delete:
+      tags:
+      - procedure-config-controller
+      summary: deleteByTemplate
+      operationId: deleteByTemplateUsingDELETE_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /procedure-config/jud-civil-status/--list:
+    get:
+      tags:
+      - procedure-config-controller
+      summary: getAgencyConfigByCivilStatusPage
+      operationId: getAgencyConfigByCivilStatusPageUsingGET
+      parameters:
+      - name: jud-civil-status
+        in: query
+        description: jud-civil-status
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetProceConfigByCivilDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /procedure-config/jud-record/--list:
+    get:
+      tags:
+      - procedure-config-controller
+      summary: getAgencyConfigByJudicialRecordPage
+      operationId: getAgencyConfigByJudicialRecordPageUsingGET
+      parameters:
+      - name: jud-record-id
+        in: query
+        description: jud-record-id
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetProceConfigByRecordDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /procedure-config/pattern/--list:
+    get:
+      tags:
+      - procedure-config-controller
+      summary: getProcedureConfigByPatternPage
+      operationId: getProcedureConfigByPatternPageUsingGET
+      parameters:
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pattern-id
+        in: query
+        description: pattern-id
+        schema:
+          type: string
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetProceConfigByPatDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /procedure-config/template/--list:
+    get:
+      tags:
+      - procedure-config-controller
+      summary: getAgencyConfigByTemplatePage
+      operationId: getAgencyConfigByTemplatePageUsingGET_1
+      parameters:
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: template-id
+        in: query
+        description: template-id
+        schema:
+          type: string
+      - name: type-template-id
+        in: query
+        description: type-template-id
+        schema:
+          type: string
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetProceConfigByTempDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /procedure-config/{id}:
+    get:
+      tags:
+      - procedure-config-controller
+      summary: getById
+      operationId: getByIdUsingGET_3
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProcedureConfig'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+      - procedure-config-controller
+      summary: updateProcedureConfig
+      operationId: updateProcedureConfigUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: putProcedureConfigDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutProcedureConfigDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: putProcedureConfigDto
+    delete:
+      tags:
+      - procedure-config-controller
+      summary: deleteProcedureConfig
+      operationId: deleteProcedureConfigUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /procedure-form:
+    get:
+      tags:
+      - procedure-form
+      summary: getProcedureForms
+      operationId: getProcedureFormsUsingGET
+      parameters:
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        required: true
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetProcedureFormDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+      - procedure-form
+      summary: postProcedureForm
+      operationId: postProcedureFormUsingPOST
+      requestBody:
+        description: postProcostDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProcedureFormDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostResponseDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: postProcostDto
+  /procedure-form/--apply-online:
+    get:
+      tags:
+      - procedure-form
+      summary: getProcedureFormForApplyOnline
+      operationId: getProcedureFormForApplyOnlineUsingGET
+      parameters:
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetProcedureFormForApplyDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /procedure-form/{id}:
+    get:
+      tags:
+      - procedure-form
+      summary: getProcedureForm
+      operationId: getProcedureFormUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetProcedureFormByIdDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+      - procedure-form
+      summary: updateProcedureForm
+      operationId: updateProcedureFormUsingPUT_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: procedureFormPayload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProcedureFormDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: procedureFormPayload
+    delete:
+      tags:
+      - procedure-form
+      summary: deleteProcedureForm
+      operationId: deleteProcedureFormUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /procedure-process-definition:
+    get:
+      tags:
+      - procedure-process-definition-controller
+      summary: getProcedureProcessDefs
+      operationId: getProcedureProcessDefsUsingGET
+      parameters:
+      - name: agency-id
+        in: query
+        description: agency-id
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        schema:
+          type: string
+      - name: sector-id
+        in: query
+        description: sector-id
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: status
+        in: query
+        description: status
+        schema:
+          type: integer
+          format: int32
+          default: -1
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetProcedureProcessDefDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+      - procedure-process-definition-controller
+      summary: postProcedureProcessDef
+      operationId: postProcedureProcessDefUsingPOST
+      requestBody:
+        description: procedureProcessPayload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProcedureProcessDefDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostResponseDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: procedureProcessPayload
+  /procedure-process-definition/--apply-online:
+    get:
+      tags:
+      - procedure-process-definition-controller
+      summary: getProcedureProcessDefsForOnline
+      operationId: getProcedureProcessDefsForOnlineUsingGET
+      parameters:
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        required: true
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetProcedureProcessDefDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /procedure-process-definition/{id}:
+    get:
+      tags:
+      - procedure-process-definition-controller
+      summary: getProcedureProcessDef
+      operationId: getProcedureProcessDefUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetProcedureProcessDefDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+      - procedure-process-definition-controller
+      summary: updateProcedureProcessDef
+      operationId: updateProcedureProcessDefUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: procedureProcessPayload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProcedureProcessDefDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: procedureProcessPayload
+    delete:
+      tags:
+      - procedure-process-definition-controller
+      summary: deleteSector
+      operationId: deleteSectorUsingDELETE_2
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /procedure-process-definition/{id}/--is-used:
+    get:
+      tags:
+      - procedure-process-definition-controller
+      summary: checkProcessIsUsed
+      operationId: checkProcessIsUsedUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int32
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /procedure/--has-children:
+    post:
+      tags:
+      - procedure-controller
+      summary: checkProcedureHasChildren
+      operationId: checkProcedureHasChildrenUsingPOST
+      parameters:
+      - name: procedure-code
+        in: query
+        description: procedure-code
+        schema:
+          type: string
+      - name: procedure-name
+        in: query
+        description: procedure-name
+        schema:
+          type: string
+      requestBody:
+        description: agency
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/IdNameDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IdNameDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: agency
+  /procedure/--sync-npad-all:
+    put:
+      tags:
+      - procedure-controller
+      summary: syncAll
+      operationId: syncAllUsingPUT
+      requestBody:
+        description: syncNpadDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutProcedureNpadSync'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: syncNpadDto
+  /procedure/--sync-npad-by-code:
+    put:
+      tags:
+      - procedure-controller
+      summary: syncSingle
+      operationId: syncSingleUsingPUT
+      requestBody:
+        description: syncNpadDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutProcedureNpadSync'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: syncNpadDto
+  /procedure/full-procost-online:
+    get:
+      tags:
+      - procedure-controller
+      summary: findByProcedureId
+      operationId: findByProcedureIdUsingGET
+      parameters:
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FullProcostOnlineDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /procedure/update-reporter:
+    get:
+      tags:
+      - procedure-controller
+      summary: updateProcedureReporter
+      operationId: updateProcedureReporterUsingGET
+      parameters:
+      - name: site-url
+        in: query
+        description: site-url
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProcedureAgencySectorDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /procedure/{id}:
+    get:
+      tags:
+      - procedure-controller
+      summary: Procedure
+      operationId: ProcedureUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetProcedureByIdDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+      - procedure-controller
+      summary: updateProcedureForm
+      operationId: updateProcedureFormUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: procedurePayload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProcedureDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: procedurePayload
+    delete:
+      tags:
+      - procedure-controller
+      summary: deleteProcedure
+      operationId: deleteProcedureUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /procedure/{id}/--full:
+    get:
+      tags:
+      - procedure-controller
+      summary: procedureFull
+      operationId: procedureFullUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetProcedureDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /procedure/{id}/children:
+    put:
+      tags:
+      - procedure-controller
+      summary: updateProcedureChildren
+      operationId: updateProcedureChildrenUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: agencyId
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PutProcedureChildrenDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: agencyId
+  /process-definition-task:
+    get:
+      tags:
+      - process-definition-task-controller
+      summary: getProcessDefinitionTasks
+      operationId: getProcessDefinitionTasksUsingGET
+      parameters:
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: process-definition-id
+        in: query
+        description: process-definition-id
+        required: true
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetProcessDefinitionTaskDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+      - process-definition-task-controller
+      summary: postSector
+      operationId: postSectorUsingPOST
+      requestBody:
+        description: processDefinitionTaskDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProcessDefinitionTaskDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostResponseDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: processDefinitionTaskDto
+  /process-definition-task/{id}:
+    get:
+      tags:
+      - process-definition-task-controller
+      summary: getProcessDefinitionTask
+      operationId: getProcessDefinitionTaskUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetProcessDefinitionTaskDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+      - process-definition-task-controller
+      summary: updateSector
+      operationId: updateSectorUsingPUT_2
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: sectorPayload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProcessDefinitionTaskDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: sectorPayload
+    delete:
+      tags:
+      - process-definition-task-controller
+      summary: deleteSector
+      operationId: deleteSectorUsingDELETE_3
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /procost:
+    get:
+      tags:
+      - procost-controller
+      summary: getProcosts
+      operationId: getProcostsUsingGET
+      parameters:
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        required: true
+        schema:
+          type: string
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetProcostDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+      - procost-controller
+      summary: postProcost
+      operationId: postProcostUsingPOST
+      requestBody:
+        description: postProcostDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProcostDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostResponseDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: postProcostDto
+  /procost-type:
+    get:
+      tags:
+      - procost-type-controller
+      summary: getProcostType
+      operationId: getProcostTypeUsingGET
+      parameters:
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetProcostTypeDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+      - procost-type-controller
+      summary: postProcostType
+      operationId: postProcostTypeUsingPOST
+      requestBody:
+        description: postProcostDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProcostTypeDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostResponseDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: postProcostDto
+  /procost-type/{id}:
+    get:
+      tags:
+      - procost-type-controller
+      summary: getForm
+      operationId: getFormUsingGET_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetProcostTypeByIdDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+      - procost-type-controller
+      summary: updateProcostType
+      operationId: updateProcostTypeUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: formPayload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProcostTypeDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: formPayload
+    delete:
+      tags:
+      - procost-type-controller
+      summary: deleteProcostType
+      operationId: deleteProcostTypeUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /procost/--for-online:
+    get:
+      tags:
+      - procost-controller
+      summary: getForOnline
+      operationId: getForOnlineUsingGET
+      parameters:
+      - name: procedure-id
+        in: query
+        description: procedure-id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetProcostOnlineDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /procost/{id}:
+    get:
+      tags:
+      - procost-controller
+      summary: getProcost
+      operationId: getProcostUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetProcostByIdDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+      - procost-controller
+      summary: updateProcost
+      operationId: updateProcostUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: procostPayload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProcostDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: procostPayload
+    delete:
+      tags:
+      - procost-controller
+      summary: deleteProcost
+      operationId: deleteProcostUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /sector:
+    get:
+      tags:
+      - sector-controller
+      summary: getSectors
+      operationId: getSectorsUsingGET_1
+      parameters:
+      - name: keyword
+        in: query
+        description: keyword
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: paged
+        in: query
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sort.sorted
+        in: query
+        schema:
+          type: boolean
+      - name: sort.unsorted
+        in: query
+        schema:
+          type: boolean
+      - name: spec
+        in: query
+        description: spec
+        schema:
+          type: string
+          default: slice
+      - name: status
+        in: query
+        description: status
+        schema:
+          type: integer
+          format: int32
+      - name: unpaged
+        in: query
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Slice«GetSectorDto»'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+      - sector-controller
+      summary: postSector
+      operationId: postSectorUsingPOST_1
+      requestBody:
+        description: sectorDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostSectorDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/IdResponse'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: sectorDto
+  /sector/--sync-npad-svc:
+    post:
+      tags:
+      - sector-controller
+      summary: syncNpadSector
+      operationId: syncNpadSectorUsingPOST
+      requestBody:
+        description: syncSectorDto
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PostSyncSector'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: syncSectorDto
+  /sector/{id}:
+    get:
+      tags:
+      - sector-controller
+      summary: getSectors
+      operationId: getSectorsUsingGET_2
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetSectorByIdDto'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+      - sector-controller
+      summary: updateSector
+      operationId: updateSectorUsingPUT_3
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: sectorPayload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutSectorDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: sectorPayload
+    delete:
+      tags:
+      - sector-controller
+      summary: deleteSector
+      operationId: deleteSectorUsingDELETE_4
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AffectedRowsDto'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /sector/{id}/--check-used:
+    get:
+      tags:
+      - sector-controller
+      summary: checkUsed
+      operationId: checkUsedUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int32
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /sync-procedure-status/--get-by-code:
+    get:
+      tags:
+      - sync-procedure-statu-controller
+      summary: getSyncStatusByCode
+      operationId: getSyncStatusByCodeUsingGET
+      parameters:
+      - name: code
+        in: query
+        description: code
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SyncProcedureStatus'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+components:
+  schemas:
+    Activiti:
+      title: Activiti
+      required:
+      - id
+      - model
+      type: object
+      properties:
+        id:
+          type: string
+        model:
+          $ref: '#/components/schemas/ActivitiModel'
+    ActivitiModel:
+      title: ActivitiModel
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        project:
+          $ref: '#/components/schemas/ActivitiProject'
+    ActivitiProject:
+      title: ActivitiProject
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+    AffectedRowsDto:
+      title: AffectedRowsDto
+      type: object
+      properties:
+        affectedRows:
+          type: integer
+          format: int32
+    Agency:
+      title: Agency
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        logo:
+          type: string
+        name:
+          type: string
+    AgencyConfig:
+      title: AgencyConfig
+      required:
+      - agency
+      - createdDate
+      - deploymentId
+      - dossierCodePattern
+      - template
+      - updatedDate
+      type: object
+      properties:
+        agency:
+          $ref: '#/components/schemas/AgencyFormConfig'
+        createdDate:
+          type: string
+          format: date-time
+        deploymentId:
+          type: string
+        dossierCodePattern:
+          $ref: '#/components/schemas/DossierCodePattern'
+        id:
+          type: string
+        template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+        updatedDate:
+          type: string
+          format: date-time
+    AgencyFormConfig:
+      title: AgencyFormConfig
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        logo:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+    CandidateGroup:
+      title: CandidateGroup
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+    CandidateUser:
+      title: CandidateUser
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: array
+          items:
+            $ref: '#/components/schemas/Value'
+    Children:
+      title: Children
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        route:
+          type: string
+    ConfigurationLink:
+      title: ConfigurationLink
+      required:
+      - name
+      - url
+      type: object
+      properties:
+        logo:
+          $ref: '#/components/schemas/File'
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        url:
+          type: string
+    Contact:
+      title: Contact
+      required:
+      - address
+      type: object
+      properties:
+        address:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateAddress'
+        email:
+          type: string
+        phone:
+          type: string
+    DefaultConfig:
+      title: DefaultConfig
+      required:
+      - createdDate
+      - deploymentId
+      - dossierCodePattern
+      - template
+      - updatedDate
+      type: object
+      properties:
+        createdDate:
+          type: string
+          format: date-time
+        deploymentId:
+          type: string
+        dossierCodePattern:
+          $ref: '#/components/schemas/DossierCodePattern'
+        id:
+          type: string
+        template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+        updatedDate:
+          type: string
+          format: date-time
+    Detail:
+      title: Detail
+      type: object
+      properties:
+        quantity:
+          type: integer
+          format: int32
+        type:
+          $ref: '#/components/schemas/IdName'
+    DossierCodePattern:
+      title: DossierCodePattern
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    File:
+      title: File
+      type: object
+      properties:
+        filename:
+          type: string
+        id:
+          type: string
+        size:
+          type: integer
+          format: int64
+    FileTemplate:
+      title: FileTemplate
+      type: object
+      properties:
+        filename:
+          type: string
+        path:
+          type: string
+        size:
+          $ref: '#/components/schemas/Number'
+    FormSimple:
+      title: FormSimple
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+    FullProcostOnlineDto:
+      title: FullProcostOnlineDto
+      type: object
+      properties:
+        cost:
+          type: integer
+          format: int64
+        description:
+          type: string
+        id:
+          type: integer
+          format: int64
+        monetaryUnitId:
+          type: integer
+          format: int64
+        procostTypeId:
+          type: integer
+          format: int64
+    GetAgencyConfByPatDto:
+      title: GetAgencyConfByPatDto
+      type: object
+      properties:
+        agency:
+          $ref: '#/components/schemas/Agency'
+        createdDate:
+          type: string
+          format: date-time
+        deploymentId:
+          type: string
+        dossierCodePattern:
+          $ref: '#/components/schemas/DossierCodePattern'
+        id:
+          type: string
+        updatedDate:
+          type: string
+          format: date-time
+    GetAgencyConfByTempDto:
+      title: GetAgencyConfByTempDto
+      type: object
+      properties:
+        agency:
+          $ref: '#/components/schemas/Agency'
+        createdDate:
+          type: string
+          format: date-time
+        deploymentId:
+          type: string
+        id:
+          type: string
+        template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+        updatedDate:
+          type: string
+          format: date-time
+    GetAgencyConfigDto:
+      title: GetAgencyConfigDto
+      type: object
+      properties:
+        agency:
+          $ref: '#/components/schemas/Agency'
+        createdDate:
+          type: string
+          format: date-time
+        deploymentId:
+          type: string
+        dossierCodePattern:
+          $ref: '#/components/schemas/DossierCodePattern'
+        id:
+          type: string
+        updatedDate:
+          type: string
+          format: date-time
+    GetConfigurationDto:
+      title: GetConfigurationDto
+      type: object
+      properties:
+        banner:
+          $ref: '#/components/schemas/File'
+        contact:
+          $ref: '#/components/schemas/Contact'
+        footer:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateFooter'
+        id:
+          type: string
+        link:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigurationLink'
+        logo:
+          $ref: '#/components/schemas/File'
+    GetFormByIdDto:
+      title: GetFormByIdDto
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        status:
+          type: integer
+          format: int32
+    GetFormDto:
+      title: GetFormDto
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: integer
+          format: int32
+    GetMenuByIdDto:
+      title: GetMenuByIdDto
+      type: object
+      properties:
+        chidren:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuChildren'
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        order:
+          type: integer
+          format: int32
+        route:
+          type: string
+        status:
+          type: integer
+          format: int32
+    GetMenuConfigurationDto:
+      title: GetMenuConfigurationDto
+      type: object
+      properties:
+        agency:
+          $ref: '#/components/schemas/IdName'
+        id:
+          type: string
+        menu:
+          $ref: '#/components/schemas/Menu'
+        order:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+    GetMenuDto:
+      title: GetMenuDto
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        route:
+          type: string
+    GetProceConfigByBusinessDto:
+      title: GetProceConfigByBusinessDto
+      type: object
+      properties:
+        businessRegIntegration:
+          $ref: '#/components/schemas/Number'
+        createdDate:
+          type: string
+          format: date-time
+        deploymentId:
+          type: string
+        id:
+          type: string
+        procedure:
+          $ref: '#/components/schemas/ProcedureFormConfig0'
+        updatedDate:
+          type: string
+          format: date-time
+    GetProceConfigByCivilDto:
+      title: GetProceConfigByCivilDto
+      type: object
+      properties:
+        createdDate:
+          type: string
+          format: date-time
+        deploymentId:
+          type: string
+        id:
+          type: string
+        judicialCivilStatus:
+          $ref: '#/components/schemas/Judicial'
+        procedure:
+          $ref: '#/components/schemas/ProcedureFormConfig0'
+        updatedDate:
+          type: string
+          format: date-time
+    GetProceConfigByPatDto:
+      title: GetProceConfigByPatDto
+      type: object
+      properties:
+        createdDate:
+          type: string
+          format: date-time
+        deploymentId:
+          type: string
+        dossierCodePattern:
+          $ref: '#/components/schemas/DossierCodePattern'
+        id:
+          type: string
+        procedure:
+          $ref: '#/components/schemas/ProcedureFormConfig0'
+        updatedDate:
+          type: string
+          format: date-time
+    GetProceConfigByRecordDto:
+      title: GetProceConfigByRecordDto
+      type: object
+      properties:
+        createdDate:
+          type: string
+          format: date-time
+        deploymentId:
+          type: string
+        id:
+          type: string
+        judicialRecord:
+          $ref: '#/components/schemas/Judicial'
+        procedure:
+          $ref: '#/components/schemas/ProcedureFormConfig0'
+        updatedDate:
+          type: string
+          format: date-time
+    GetProceConfigByTempDto:
+      title: GetProceConfigByTempDto
+      type: object
+      properties:
+        createdDate:
+          type: string
+          format: date-time
+        deploymentId:
+          type: string
+        id:
+          type: string
+        procedure:
+          $ref: '#/components/schemas/ProcedureFormConfig0'
+        template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+        updatedDate:
+          type: string
+          format: date-time
+    GetProcedureByIdDto:
+      title: GetProcedureByIdDto
+      type: object
+      properties:
+        agency:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdName'
+        agencyAccept:
+          type: string
+        agencyCombination:
+          type: string
+        agencyIssued:
+          $ref: '#/components/schemas/IdName'
+        agencyLevel:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdName'
+        applyMethod:
+          type: string
+        applyMethodId:
+          type: string
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcedureChildren'
+        code:
+          type: string
+        dossierComponent:
+          type: string
+        dossierQuantity:
+          type: integer
+          format: int32
+        endDate:
+          type: string
+          format: date-time
+        fee:
+          type: string
+        id:
+          type: string
+        implementer:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdName'
+        implementerDesc:
+          type: string
+        legalGrounds:
+          type: string
+        level:
+          $ref: '#/components/schemas/IdName'
+        name:
+          type: string
+        processingTime:
+          type: string
+        requirement:
+          type: string
+        results:
+          type: string
+        sector:
+          $ref: '#/components/schemas/ProcedureSectorSimple'
+        serviceFee:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        status:
+          type: integer
+          format: int32
+        steps:
+          type: string
+        viewCount:
+          type: integer
+          format: int64
+    GetProcedureConfigDto:
+      title: GetProcedureConfigDto
+      type: object
+      properties:
+        createdDate:
+          type: string
+          format: date-time
+        deploymentId:
+          type: string
+        dossierCodePattern:
+          $ref: '#/components/schemas/DossierCodePattern'
+        id:
+          type: string
+        procedure:
+          $ref: '#/components/schemas/ProcedureFormConfig0'
+        updatedDate:
+          type: string
+          format: date-time
+    GetProcedureDto:
+      title: GetProcedureDto
+      type: object
+      properties:
+        agency:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        agencyIssued:
+          $ref: '#/components/schemas/Tag'
+        agencyLevel:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        applyMethod:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        case:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcedureChildren'
+        code:
+          type: string
+        dossierQuantity:
+          type: integer
+          format: int32
+        endDate:
+          type: string
+          format: date-time
+        id:
+          type: string
+        implementer:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        level:
+          $ref: '#/components/schemas/Tag'
+        npadsvcSyncDate:
+          $ref: '#/components/schemas/ProcedureNpadsvc'
+        paymentMethod:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        sector:
+          $ref: '#/components/schemas/ProcedureSector'
+        startDate:
+          type: string
+          format: date-time
+        status:
+          type: integer
+          format: int32
+        translate:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcedureTranslate'
+        viewCount:
+          type: integer
+          format: int64
+    GetProcedureFormByIdDto:
+      title: GetProcedureFormByIdDto
+      type: object
+      properties:
+        case:
+          $ref: '#/components/schemas/Tag'
+        defaultDirectly:
+          type: integer
+          format: int32
+        defaultOnline:
+          type: integer
+          format: int32
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcedureFormDetail'
+        file:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcedureFormFile'
+        form:
+          $ref: '#/components/schemas/ProcedureFormForm'
+        id:
+          type: string
+        procedure:
+          $ref: '#/components/schemas/Id'
+        procedureProcessDefinition:
+          $ref: '#/components/schemas/Id'
+        requirement:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+    GetProcedureFormDto:
+      title: GetProcedureFormDto
+      type: object
+      properties:
+        case:
+          $ref: '#/components/schemas/IdName'
+        defaultDirectly:
+          type: integer
+          format: int32
+        defaultOnline:
+          type: integer
+          format: int32
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/Detail'
+        file:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcedureFormFile'
+        form:
+          $ref: '#/components/schemas/FormSimple'
+        id:
+          type: string
+        procedure:
+          $ref: '#/components/schemas/Id'
+        procedureProcessDefinition:
+          $ref: '#/components/schemas/Id'
+        requirement:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+    GetProcedureFormForApplyDto:
+      title: GetProcedureFormForApplyDto
+      type: object
+      properties:
+        case:
+          $ref: '#/components/schemas/IdName'
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcedureFormDetailSimple'
+        file:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcedureFormFileGet'
+        formId:
+          type: string
+        formName:
+          type: string
+        procedureProcessDefinition:
+          $ref: '#/components/schemas/Id'
+        requirement:
+          type: integer
+          format: int32
+    GetProcedureProcessDefDto:
+      title: GetProcedureProcessDefDto
+      required:
+      - procedure
+      - processDefinition
+      type: object
+      properties:
+        endDate:
+          type: string
+          format: date-time
+        firstTask:
+          $ref: '#/components/schemas/ProcessDefinitionFirstTask'
+        id:
+          type: string
+        isApplied:
+          type: integer
+          format: int32
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        procedure:
+          $ref: '#/components/schemas/Procedure'
+        processDefinition:
+          $ref: '#/components/schemas/ProcessDefinitionSimple'
+        startDate:
+          type: string
+          format: date-time
+        status:
+          type: integer
+          format: int32
+    GetProcedurePublicDto:
+      title: GetProcedurePublicDto
+      type: object
+      properties:
+        agencyLevelName:
+          type: array
+          items:
+            type: string
+        agencyName:
+          type: string
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        procedureLevelName:
+          type: string
+        sectorName:
+          type: string
+        status:
+          type: integer
+          format: int32
+    GetProcessDefinitionTaskDto:
+      title: GetProcessDefinitionTaskDto
+      required:
+      - processDefinition
+      type: object
+      properties:
+        candidateGroup:
+          type: array
+          items:
+            $ref: '#/components/schemas/CandidateGroup'
+        candidateUser:
+          type: array
+          items:
+            $ref: '#/components/schemas/CandidateUser'
+        code:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        isFirst:
+          type: integer
+          format: int32
+        name:
+          type: string
+        processDefinition:
+          $ref: '#/components/schemas/ProcessDefinitionSimple'
+        processingTime:
+          type: integer
+          format: int64
+        variable:
+          $ref: '#/components/schemas/ProcessDefinitionTaskVariable'
+    GetProcostByIdDto:
+      title: GetProcostByIdDto
+      type: object
+      properties:
+        advance:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcostTypeAdvance'
+        cost:
+          type: string
+        default:
+          type: integer
+          format: int32
+        description:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateDescription'
+        id:
+          type: string
+        monetaryUnit:
+          $ref: '#/components/schemas/Tag'
+        procedure:
+          $ref: '#/components/schemas/Id'
+        required:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+        type:
+          $ref: '#/components/schemas/ProcostTypeSimple'
+    GetProcostDto:
+      title: GetProcostDto
+      type: object
+      properties:
+        advance:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcostTypeAdvance'
+        cost:
+          type: string
+        default:
+          type: integer
+          format: int32
+        description:
+          type: string
+        id:
+          type: string
+        monetaryUnit:
+          $ref: '#/components/schemas/MonetaryUnit'
+        procedure:
+          $ref: '#/components/schemas/Id'
+        required:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+        type:
+          $ref: '#/components/schemas/Type'
+    GetProcostOnlineDto:
+      title: GetProcostOnlineDto
+      type: object
+      properties:
+        cost:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        monetaryUnit:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+        type:
+          $ref: '#/components/schemas/ProcostTypeSimple'
+    GetProcostTypeByIdDto:
+      title: GetProcostTypeByIdDto
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        quantityEditable:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+        type:
+          type: integer
+          format: int32
+    GetProcostTypeDto:
+      title: GetProcostTypeDto
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        quantityEditable:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+        type:
+          type: integer
+          format: int32
+    GetSectorByIdDto:
+      title: GetSectorByIdDto
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        parent:
+          $ref: '#/components/schemas/IdName'
+        status:
+          type: integer
+          format: int32
+    GetSectorDto:
+      title: GetSectorDto
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        parent:
+          $ref: '#/components/schemas/IdName'
+        status:
+          type: integer
+          format: int32
+    Id:
+      title: Id
+      type: object
+      properties:
+        id:
+          type: string
+    IdDto:
+      title: IdDto
+      type: object
+      properties:
+        id:
+          type: string
+    IdName:
+      title: IdName
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    IdNameDto:
+      title: IdNameDto
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    IdResponse:
+      title: IdResponse
+      type: object
+      properties:
+        id:
+          type: string
+    Judicial:
+      title: Judicial
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Menu:
+      title: Menu
+      type: object
+      properties:
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/Children'
+        id:
+          type: string
+        name:
+          type: string
+        route:
+          type: string
+    MenuChildren:
+      title: MenuChildren
+      required:
+      - name
+      - order
+      - route
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        order:
+          type: integer
+          format: int32
+        route:
+          type: string
+    MenuConfigurationMenu:
+      title: MenuConfigurationMenu
+      required:
+      - name
+      - route
+      type: object
+      properties:
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuConfigurationMenuChildren'
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        route:
+          type: string
+    MenuConfigurationMenuChildren:
+      title: MenuConfigurationMenuChildren
+      required:
+      - name
+      - order
+      - route
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        order:
+          type: integer
+          format: int32
+        route:
+          type: string
+    MonetaryUnit:
+      title: MonetaryUnit
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Number:
+      title: Number
+      type: object
+    Pageable:
+      title: Pageable
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/Sort'
+        unpaged:
+          type: boolean
+    PostAgencyConfigDto:
+      title: PostAgencyConfigDto
+      type: object
+      properties:
+        agency:
+          $ref: '#/components/schemas/AgencyFormConfig'
+        dossierCodePattern:
+          $ref: '#/components/schemas/DossierCodePattern'
+        template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+    PostConfigurationDto:
+      title: PostConfigurationDto
+      type: object
+      properties:
+        banner:
+          $ref: '#/components/schemas/File'
+        contact:
+          $ref: '#/components/schemas/Contact'
+        footer:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateFooter'
+        id:
+          type: string
+        link:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigurationLink'
+        logo:
+          $ref: '#/components/schemas/File'
+    PostDefaultConfigDto:
+      title: PostDefaultConfigDto
+      type: object
+      properties:
+        dossierCodePattern:
+          $ref: '#/components/schemas/DossierCodePattern'
+        template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+    PostFormDto:
+      title: PostFormDto
+      required:
+      - name
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        status:
+          type: integer
+          format: int32
+    PostMenuConfigurationDto:
+      title: PostMenuConfigurationDto
+      required:
+      - menu
+      - order
+      - status
+      type: object
+      properties:
+        agency:
+          $ref: '#/components/schemas/Tag'
+        menu:
+          $ref: '#/components/schemas/MenuConfigurationMenu'
+        order:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+    PostProcedureConfigDto:
+      title: PostProcedureConfigDto
+      type: object
+      properties:
+        businessRegIntegration:
+          $ref: '#/components/schemas/Number'
+        dossierCodePattern:
+          $ref: '#/components/schemas/DossierCodePattern'
+        judicialCivilStatus:
+          $ref: '#/components/schemas/Judicial'
+        judicialRecord:
+          $ref: '#/components/schemas/Judicial'
+        procedure:
+          $ref: '#/components/schemas/ProcedureFormConfig'
+        template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+    PostProcedureDto:
+      title: PostProcedureDto
+      required:
+      - agency
+      - agencyIssued
+      - agencyLevel
+      - applyMethod
+      - code
+      - level
+      - paymentMethod
+      - sector
+      - status
+      type: object
+      properties:
+        agency:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        agencyIssued:
+          $ref: '#/components/schemas/Tag'
+        agencyLevel:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        applyMethod:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        case:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcedureChildren'
+        code:
+          type: string
+        dossierQuantity:
+          type: integer
+          format: int32
+        endDate:
+          type: string
+          format: date-time
+        implementer:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        level:
+          $ref: '#/components/schemas/Tag'
+        paymentMethod:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        sector:
+          $ref: '#/components/schemas/ProcedureSector'
+        startDate:
+          type: string
+          format: date-time
+        status:
+          type: integer
+          format: int32
+        translate:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcedureTranslate'
+    PostProcedureFormDto:
+      title: PostProcedureFormDto
+      required:
+      - detail
+      - procedure
+      - procedureProcessDefinition
+      type: object
+      properties:
+        case:
+          $ref: '#/components/schemas/Tag'
+        defaultDirectly:
+          type: integer
+          format: int32
+        defaultOnline:
+          type: integer
+          format: int32
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcedureFormDetail'
+        file:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcedureFormFile'
+        form:
+          $ref: '#/components/schemas/ProcedureFormForm'
+        procedure:
+          $ref: '#/components/schemas/Id'
+        procedureProcessDefinition:
+          $ref: '#/components/schemas/Id'
+        requirement:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+    PostProcedureProcessDefDto:
+      title: PostProcedureProcessDefDto
+      required:
+      - procedure
+      - processDefinition
+      type: object
+      properties:
+        endDate:
+          type: string
+          format: date-time
+        firstTask:
+          $ref: '#/components/schemas/ProcessDefinitionFirstTask'
+        isApplied:
+          type: integer
+          format: int32
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        procedure:
+          $ref: '#/components/schemas/ProcessDefinitionProcedure'
+        processDefinition:
+          $ref: '#/components/schemas/ProcessDefinitionSimple'
+        startDate:
+          type: string
+          format: date-time
+        status:
+          type: integer
+          format: int32
+    PostProcessDefinitionTaskDto:
+      title: PostProcessDefinitionTaskDto
+      required:
+      - processDefinition
+      type: object
+      properties:
+        candidateGroup:
+          type: array
+          items:
+            $ref: '#/components/schemas/CandidateGroup'
+        candidateUser:
+          type: array
+          items:
+            $ref: '#/components/schemas/CandidateUser'
+        code:
+          type: string
+        description:
+          type: string
+        isFirst:
+          type: integer
+          format: int32
+        name:
+          type: string
+        processDefinition:
+          $ref: '#/components/schemas/ProcessDefinitionSimple'
+        processingTime:
+          type: integer
+          format: int64
+        variable:
+          $ref: '#/components/schemas/ProcessDefinitionTaskVariable'
+    PostProcostDto:
+      title: PostProcostDto
+      required:
+      - cost
+      - procedure
+      type: object
+      properties:
+        advance:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcostTypeAdvance'
+        cost:
+          type: string
+        default:
+          type: integer
+          format: int32
+        description:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateDescription'
+        monetaryUnit:
+          $ref: '#/components/schemas/ProcostMonetaryUnit'
+        procedure:
+          $ref: '#/components/schemas/Id'
+        required:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+        type:
+          $ref: '#/components/schemas/ProcostTypeSimple'
+    PostProcostTypeDto:
+      title: PostProcostTypeDto
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        quantityEditable:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+        type:
+          type: integer
+          format: int32
+    PostResponseDto:
+      title: PostResponseDto
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+    PostSectorDto:
+      title: PostSectorDto
+      required:
+      - code
+      - name
+      - status
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        parent:
+          $ref: '#/components/schemas/Tag'
+        status:
+          type: integer
+          format: int32
+    PostSyncSector:
+      title: PostSyncSector
+      required:
+      - code
+      - name
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+    Procedure:
+      title: Procedure
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        sector:
+          $ref: '#/components/schemas/Sector'
+        translate:
+          $ref: '#/components/schemas/TranslateName'
+    ProcedureAgencySectorDto:
+      title: ProcedureAgencySectorDto
+      type: object
+      properties:
+        idAgency:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        sector:
+          type: array
+          items:
+            $ref: '#/components/schemas/SectorProcedureReporter'
+    ProcedureChildren:
+      title: ProcedureChildren
+      type: object
+      properties:
+        agency:
+          $ref: '#/components/schemas/Id'
+        id:
+          type: string
+    ProcedureConfig:
+      title: ProcedureConfig
+      required:
+      - createdDate
+      - deploymentId
+      - procedure
+      - updatedDate
+      type: object
+      properties:
+        businessRegIntegration:
+          $ref: '#/components/schemas/Number'
+        createdDate:
+          type: string
+          format: date-time
+        deploymentId:
+          type: string
+        dossierCodePattern:
+          $ref: '#/components/schemas/DossierCodePattern'
+        id:
+          type: string
+        judicialCivilStatus:
+          $ref: '#/components/schemas/Judicial'
+        judicialRecord:
+          $ref: '#/components/schemas/Judicial'
+        procedure:
+          $ref: '#/components/schemas/ProcedureFormConfig'
+        template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+        updatedDate:
+          type: string
+          format: date-time
+    ProcedureFormConfig:
+      title: ProcedureFormConfig
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        sector:
+          $ref: '#/components/schemas/SectorProcedureConfig'
+    ProcedureFormConfig0:
+      title: ProcedureFormConfig0
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        sector:
+          $ref: '#/components/schemas/SectorProcedureConfig0'
+    ProcedureFormDetail:
+      title: ProcedureFormDetail
+      type: object
+      properties:
+        quantity:
+          type: integer
+          format: int32
+        type:
+          $ref: '#/components/schemas/Tag'
+    ProcedureFormDetailSimple:
+      title: ProcedureFormDetailSimple
+      type: object
+      properties:
+        quantity:
+          type: integer
+          format: int32
+        typeName:
+          type: string
+    ProcedureFormFile:
+      title: ProcedureFormFile
+      type: object
+      properties:
+        filename:
+          type: string
+        id:
+          type: string
+        size:
+          type: integer
+          format: int64
+    ProcedureFormFileGet:
+      title: ProcedureFormFileGet
+      type: object
+      properties:
+        fileId:
+          type: string
+        fileSize:
+          type: integer
+          format: int64
+        filename:
+          type: string
+    ProcedureFormForm:
+      title: ProcedureFormForm
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+    ProcedureNpadsvc:
+      title: ProcedureNpadsvc
+      type: object
+      properties:
+        code:
+          type: string
+        npadsvcSyncDate:
+          type: string
+          format: date-time
+    ProcedureSector:
+      title: ProcedureSector
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+    ProcedureSectorSimple:
+      title: ProcedureSectorSimple
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+    ProcedureTranslate:
+      title: ProcedureTranslate
+      required:
+      - languageId
+      - name
+      type: object
+      properties:
+        agencyAccept:
+          type: string
+        agencyCombination:
+          type: string
+        agencyIssued:
+          type: string
+        applyMethod:
+          type: string
+        dossierComponent:
+          type: string
+        fee:
+          type: string
+        implementMethod:
+          type: string
+        implementer:
+          type: string
+        languageId:
+          type: integer
+          format: int32
+        legalGrounds:
+          type: string
+        name:
+          type: string
+        processingTime:
+          type: string
+        requirement:
+          type: string
+        results:
+          type: string
+        serviceFee:
+          type: string
+        steps:
+          type: string
+    ProcessDefinitionFirstTask:
+      title: ProcessDefinitionFirstTask
+      type: object
+      properties:
+        candidateGroup:
+          type: array
+          items:
+            $ref: '#/components/schemas/CandidateGroup'
+        candidateUser:
+          type: array
+          items:
+            $ref: '#/components/schemas/CandidateUser'
+        id:
+          type: string
+    ProcessDefinitionProcedure:
+      title: ProcessDefinitionProcedure
+      type: object
+      properties:
+        agency:
+          $ref: '#/components/schemas/Id'
+        code:
+          type: string
+        id:
+          type: string
+        sector:
+          $ref: '#/components/schemas/ProcedureSector'
+        translate:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+    ProcessDefinitionSimple:
+      title: ProcessDefinitionSimple
+      type: object
+      properties:
+        activiti:
+          $ref: '#/components/schemas/Activiti'
+        applicantEForm:
+          $ref: '#/components/schemas/IdName'
+        eForm:
+          $ref: '#/components/schemas/IdName'
+        id:
+          type: string
+        name:
+          type: string
+        processingTime:
+          type: integer
+          format: int64
+        processingTimeUnit:
+          type: string
+        reportTemplate:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportTemplate'
+        timesheet:
+          $ref: '#/components/schemas/IdName'
+    ProcessDefinitionTaskVariable:
+      title: ProcessDefinitionTaskVariable
+      type: object
+      properties:
+        canCancelDosssier:
+          type: integer
+          format: int32
+        canChoiceNextStep:
+          type: integer
+          format: int32
+        canDeleteDossier:
+          type: integer
+          format: int32
+        canIncreaseDue:
+          type: integer
+          format: int32
+        canPaused:
+          type: integer
+          format: int32
+        canPrintDossiersCostReport:
+          type: integer
+          format: int32
+        canPrintReceiptTicket:
+          type: integer
+          format: int32
+        canResendDossierToPriviousStep:
+          type: integer
+          format: int32
+        canUpdateApplicant:
+          type: integer
+          format: int32
+        canUpdateDossierComp:
+          type: integer
+          format: int32
+        canUpdateDosssierDetail:
+          type: integer
+          format: int32
+        canUploadResult:
+          type: integer
+          format: int32
+        canUseDigitalSign:
+          type: integer
+          format: int32
+        citizenEmailTemplate:
+          $ref: '#/components/schemas/IdName'
+        citizenSMSTemplate:
+          $ref: '#/components/schemas/IdName'
+        citizenZaloTemplate:
+          $ref: '#/components/schemas/IdName'
+        form:
+          $ref: '#/components/schemas/IdName'
+        mustAttachResultsFile:
+          type: integer
+          format: int32
+        mustChooseAssignee:
+          type: integer
+          format: int32
+        mustConfirm:
+          type: integer
+          format: int32
+        mustPublishInvoice:
+          type: integer
+          format: int32
+        mustRatingOfficials:
+          type: integer
+          format: int32
+        mustSendSMSToApplicant:
+          type: integer
+          format: int32
+        officerEmailTemplate:
+          $ref: '#/components/schemas/IdName'
+        officerSMSTemplate:
+          $ref: '#/components/schemas/IdName'
+        officerZaloTemplate:
+          $ref: '#/components/schemas/IdName'
+        processComments:
+          type: string
+    ProcostMonetaryUnit:
+      title: ProcostMonetaryUnit
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+    ProcostTypeAdvance:
+      title: ProcostTypeAdvance
+      type: object
+      properties:
+        applyMethod:
+          $ref: '#/components/schemas/Id'
+        cost:
+          type: string
+        default:
+          type: integer
+          format: int32
+        required:
+          type: integer
+          format: int32
+    ProcostTypeSimple:
+      title: ProcostTypeSimple
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        quantityEditable:
+          type: integer
+          format: int32
+        type:
+          type: integer
+          format: int32
+    PutAgencyConfigDto:
+      title: PutAgencyConfigDto
+      type: object
+      properties:
+        dossierCodePattern:
+          $ref: '#/components/schemas/DossierCodePattern'
+        template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+    PutDefaultConfigDto:
+      title: PutDefaultConfigDto
+      type: object
+      properties:
+        dossierCodePattern:
+          $ref: '#/components/schemas/DossierCodePattern'
+        template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+    PutMenuConfigurationDto:
+      title: PutMenuConfigurationDto
+      required:
+      - menu
+      - order
+      - status
+      type: object
+      properties:
+        agency:
+          $ref: '#/components/schemas/Tag'
+        deploymentId:
+          type: string
+        menu:
+          $ref: '#/components/schemas/MenuConfigurationMenu'
+        order:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+    PutProcedureChildrenDto:
+      title: PutProcedureChildrenDto
+      type: object
+      properties:
+        childrenId:
+          type: string
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+    PutProcedureConfigDto:
+      title: PutProcedureConfigDto
+      type: object
+      properties:
+        businessRegIntegration:
+          $ref: '#/components/schemas/Number'
+        dossierCodePattern:
+          $ref: '#/components/schemas/DossierCodePattern'
+        judicialCivilStatus:
+          $ref: '#/components/schemas/Judicial'
+        judicialRecord:
+          $ref: '#/components/schemas/Judicial'
+        template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+    PutProcedureNpadSync:
+      title: PutProcedureNpadSync
+      type: object
+      properties:
+        agencyCode:
+          type: string
+        agencyId:
+          type: string
+        code:
+          type: string
+        oldCode:
+          type: string
+        subsystemId:
+          type: string
+        syncCode:
+          type: string
+    PutSectorDto:
+      title: PutSectorDto
+      required:
+      - name
+      type: object
+      properties:
+        code:
+          type: string
+        deploymentId:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+        parent:
+          $ref: '#/components/schemas/Tag'
+        status:
+          type: integer
+          format: int32
+    ReportTemplate:
+      title: ReportTemplate
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/Tag'
+    Sector:
+      title: Sector
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/TranslateName'
+    SectorProcedureConfig:
+      title: SectorProcedureConfig
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+    SectorProcedureConfig0:
+      title: SectorProcedureConfig0
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    SectorProcedureReporter:
+      title: SectorProcedureReporter
+      type: object
+      properties:
+        id:
+          type: string
+        procedureQuantity:
+          type: integer
+          format: int32
+        transSector:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+    Slice«DefaultConfig»:
+      title: Slice«DefaultConfig»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/DefaultConfig'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetAgencyConfByPatDto»:
+      title: Slice«GetAgencyConfByPatDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetAgencyConfByPatDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetAgencyConfByTempDto»:
+      title: Slice«GetAgencyConfByTempDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetAgencyConfByTempDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetAgencyConfigDto»:
+      title: Slice«GetAgencyConfigDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetAgencyConfigDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetFormDto»:
+      title: Slice«GetFormDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetFormDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetMenuConfigurationDto»:
+      title: Slice«GetMenuConfigurationDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetMenuConfigurationDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetProceConfigByBusinessDto»:
+      title: Slice«GetProceConfigByBusinessDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetProceConfigByBusinessDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetProceConfigByCivilDto»:
+      title: Slice«GetProceConfigByCivilDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetProceConfigByCivilDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetProceConfigByPatDto»:
+      title: Slice«GetProceConfigByPatDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetProceConfigByPatDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetProceConfigByRecordDto»:
+      title: Slice«GetProceConfigByRecordDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetProceConfigByRecordDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetProceConfigByTempDto»:
+      title: Slice«GetProceConfigByTempDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetProceConfigByTempDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetProcedureConfigDto»:
+      title: Slice«GetProcedureConfigDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetProcedureConfigDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetProcedureFormDto»:
+      title: Slice«GetProcedureFormDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetProcedureFormDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetProcedureProcessDefDto»:
+      title: Slice«GetProcedureProcessDefDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetProcedureProcessDefDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetProcedurePublicDto»:
+      title: Slice«GetProcedurePublicDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetProcedurePublicDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetProcessDefinitionTaskDto»:
+      title: Slice«GetProcessDefinitionTaskDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetProcessDefinitionTaskDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetProcostDto»:
+      title: Slice«GetProcostDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetProcostDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetProcostTypeDto»:
+      title: Slice«GetProcostTypeDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetProcostTypeDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Slice«GetSectorDto»:
+      title: Slice«GetSectorDto»
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetSectorDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Sort:
+      title: Sort
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+    SyncProcedureStatus:
+      title: SyncProcedureStatus
+      type: object
+      properties:
+        agencyCode:
+          type: string
+        code:
+          type: string
+        count:
+          type: integer
+          format: int32
+        createdDate:
+          type: string
+          format: date-time
+        current:
+          type: integer
+          format: int32
+        errors:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        status:
+          type: integer
+          format: int32
+        updatedDate:
+          type: string
+          format: date-time
+    Tag:
+      title: Tag
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+    Template:
+      title: Template
+      type: object
+      properties:
+        file:
+          $ref: '#/components/schemas/FileTemplate'
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/TemplateType'
+    TemplateType:
+      title: TemplateType
+      type: object
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslateName'
+    TranslateAddress:
+      title: TranslateAddress
+      type: object
+      properties:
+        languageId:
+          type: integer
+          format: int32
+        name:
+          type: string
+    TranslateDescription:
+      title: TranslateDescription
+      type: object
+      properties:
+        content:
+          type: string
+        languageId:
+          type: integer
+          format: int32
+    TranslateFooter:
+      title: TranslateFooter
+      type: object
+      properties:
+        content:
+          type: string
+        languageId:
+          type: integer
+          format: int32
+    TranslateName:
+      title: TranslateName
+      type: object
+      properties:
+        languageId:
+          type: integer
+          format: int32
+        name:
+          type: string
+    Type:
+      title: Type
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        quantityEditable:
+          type: integer
+          format: int32
+        type:
+          type: integer
+          format: int32
+    Value:
+      title: Value
+      type: object
+      properties:
+        value:
+          type: string
